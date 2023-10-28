@@ -34,7 +34,10 @@ async function getUser() {
 		}
 
 		if (result["user"]["department"]) {
-			document.getElementById("department").value = result["user"]["department"];
+			document.getElementById("department").textContent = result["user"]["department"]["name"];
+		}
+		if (result["user"]["portal"]) {
+			document.getElementById("portal").textContent = result["user"]["portal"]["name"];
 		}
 	} else if (status === 422) {
 		showToast(result['detail'][0]['msg'])
