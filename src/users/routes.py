@@ -1,9 +1,14 @@
-from fastapi import APIRouter, Depends
+from uuid import UUID
 
+from fastapi import APIRouter, Depends, HTTPException
+from starlette.status import HTTP_400_BAD_REQUEST
+
+from core.exceptions import NoRowsFoundError
+from core.service import generic_service
 from src.auth.service import get_user_or_401
 from src.portals.schemas import UserProfileRead
 from src.users.schemas import UpdateUser
-from src.users.models import User
+from src.users.models import Review, User
 from src.users.service import user_service
 
 
@@ -17,7 +22,21 @@ async def current_user(user: User = Depends(get_user_or_401)) -> UserProfileRead
 
 @user_router.patch("/update")
 async def update_profile(data: UpdateUser, user: User = Depends(get_user_or_401)) -> UpdateUser:
-    user = await user_service.update(user.id, data.model_dump())
+    user = await user_service.update(user.id, data.model_dump(exclude_unset=True))
     return UpdateUser(
         first_name=user.first_name, last_name=user.last_name, patronymic=user.patronymic
     )
+
+
+@user_router.get("/reviews")
+async def reviews_list():
+    service = await generic_service(Review)
+    return await service.all()
+
+
+@user_router.delete("/dismiss/{worker_id}")
+async def dismissal(worker_id: UUID) -> UpdateUser:
+    try:
+        return await user_service.update(worker_id, {"department_id": None})
+    except NoRowsFoundError:
+        raise HTTPException(HTTP_400_BAD_REQUEST, "Такого департамента не существует")

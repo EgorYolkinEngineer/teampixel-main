@@ -1,3 +1,4 @@
+from uuid import UUID
 from core.service import BaseService
 from core.database import db_session
 from src.users.models import User
@@ -18,6 +19,10 @@ class UserService(BaseService):
     async def add(self, data: dict):
         data["password"] = hash_password(data.get("password"))
         return await super().add(data)
+
+    async def dismissal_worker(worker_id: UUID):
+        worker = await super().retrieve(worker_id)
+        return await super().update(worker_id, department_id=None)
 
 
 user_service = UserService(UserRepository)

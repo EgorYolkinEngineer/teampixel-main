@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import UUID, DateTime, ForeignKey, String, func, Enum, Boolean
+from sqlalchemy import UUID, DateTime, ForeignKey, String, func, Enum, Boolean, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.models import Base
@@ -30,3 +30,7 @@ class User(Base):
         "Portal", lazy="selectin", foreign_keys="User.portal_id"
     )
     department: Mapped["Department"] = relationship("Department", lazy="selectin")
+
+
+class Review(Base):
+    text: Mapped[str] = mapped_column(Text)

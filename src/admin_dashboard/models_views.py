@@ -1,7 +1,7 @@
 from sqladmin import ModelView
 from src.portals.models import Company, Department, Portal
 from src.courses.models import Course, Test
-from src.users.models import User
+from src.users.models import User, Review
 
 
 class UserAdmin(ModelView, model=User):
@@ -65,6 +65,16 @@ class DepartmentAdmin(ModelView, model=Department):
     """User model in admin dashboard."""
 
     column_list = [Department.id, Department.name]
+    can_create = True
+    can_edit = True
+    can_delete = True
+    can_view_details = True
+
+
+class ReviewAdmin(ModelView, model=Review):
+    """User model in admin dashboard."""
+
+    column_list = [Review.id, Review.text]
     can_create = True
     can_edit = True
     can_delete = True
