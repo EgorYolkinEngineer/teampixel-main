@@ -11,22 +11,34 @@ function toggleSchoolRegister() {
 
 async function getUser() {
 	let response = await fetch('/api/v1/users/me', {
-		method: 'POST',
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({
-			email: email.value,
-			first_name: firstName.value,
-			last_name: lastName.value,
-			password: password.value,
-		}),
 	})
 	let status = response.status
 	let result = await response.json()
 
-	if (status === 201) {
-		console.log(result);
+	if (status === 200) {
+		document.getElementById("editFirstName").value = result["user"]["first_name"];
+		document.getElementById("editLastName").value = result["user"]["last_name"];
+		document.getElementById("fullName").innerHTML = `
+		${result["user"]["first_name"]} 
+		${result["user"]["last_name"]} 
+		`
+		if (result["user"]["patronymic"]) {
+			document.getElementById("fullName").innerHTML += result["user"]["patronymic"];
+			document.getElementById("editPatronymic").value = result["user"]["patronymic"]; 
+		} else {
+			document.getElementById("fill-profile-info-alert").classList.remove("d-none")
+		}
+
+		if (result["user"]["department"]) {
+			document.getElementById("department").textContent = result["user"]["department"]["name"];
+		}
+		if (result["user"]["portal"]) {
+			document.getElementById("portal").textContent = result["user"]["portal"]["name"];
+		}
 	} else if (status === 422) {
 		showToast(result['detail'][0]['msg'])
 	} else if (status === 400) {

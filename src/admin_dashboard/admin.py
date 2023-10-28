@@ -26,7 +26,7 @@ class CustomAdmin(Admin):
         return response
 
     async def logout(self, request: Request) -> Response:
-        response = RedirectResponse(request.url_for("admin:login"), status_code=302)
+        response = RedirectResponse("/auth", status_code=302)
         response.delete_cookie("access_token")
         response.delete_cookie("refresh_token")
         return response

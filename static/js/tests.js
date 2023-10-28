@@ -42,7 +42,3 @@ function updateVideos() {
     }
 
     block.innerHTML = content;
-
-async function createTest() {
-
-}
