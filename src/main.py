@@ -72,6 +72,7 @@ admin.add_view(models_views.DepartmentAdmin)
 admin.add_view(models_views.PortalAdmin)
 admin.add_view(models_views.TestAdmin)
 admin.add_view(models_views.CourseAdmin)
+admin.add_view(models_views.ReviewAdmin)
 
 
 # CORS middleware
