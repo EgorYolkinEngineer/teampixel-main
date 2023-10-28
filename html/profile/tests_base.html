@@ -1,0 +1,135 @@
+{% extends 'profile/profile.html' %}
+
+{% block profile_content %}
+<script>
+    localStorage.setItem('dict1', {'1': 1, '2': 1, '3': 2, '4': 3})
+</script>
+<h1>
+    Создание теста
+</h1>
+<div>
+    <h2>Создание мини-тестов</h2>
+
+    <div id="testForm">
+      <label for="testName">Имя теста:</label><br>
+      <input class="form-control" type="text" id="testName" name="testName"><br>
+      <button type="button" class="btn btn-dark" onclick="addQuestion()">Добавить вопрос</button><br><br>
+    </div>
+    <br>
+    <button type="button" class="btn btn-dark" onclick="submitTest()">Отправить тест</button>
+    
+    <script>
+    let questionCount = 0;
+    
+    function addQuestion() {
+        questionCount++;
+        let questionDiv = document.createElement('div');
+    
+        let questionLabel = document.createElement('label');
+        questionLabel.innerHTML = `Вопрос ${questionCount}:`;
+        questionDiv.appendChild(questionLabel);
+    
+        let br1 = document.createElement('br');
+        questionDiv.appendChild(br1);
+    
+        let questionInput = document.createElement('input');
+        questionInput.classList.add('form-control');
+        questionInput.type = 'text';
+        questionInput.name = `question${questionCount}`;
+        questionDiv.appendChild(questionInput);
+    
+        let br2 = document.createElement('br');
+        questionDiv.appendChild(br2);
+    
+        let answerLabel = document.createElement('label');
+        answerLabel.innerHTML = `Ответ ${questionCount}:`;
+        questionDiv.appendChild(answerLabel);
+    
+        let br3 = document.createElement('br');
+        questionDiv.appendChild(br3);
+    
+        let answerInput = document.createElement('input');
+        answerInput.classList.add('form-control');
+        answerInput.type = 'text';
+        answerInput.name = `answer${questionCount}`;
+        questionDiv.appendChild(answerInput);
+    
+        let br4 = document.createElement('br');
+        questionDiv.appendChild(br4);
+    
+        let addAnswerButton = document.createElement('button');
+        addAnswerButton.classList.add("btn")
+        addAnswerButton.classList.add("btn-dark")
+        addAnswerButton.innerHTML = 'Добавить вариант ответа';
+    
+        addAnswerButton.onclick = function() {
+            let newAnswerInput = document.createElement('input');
+            newAnswerInput.classList.add('form-control');
+            newAnswerInput.type = 'text';
+            newAnswerInput.name = `answer${questionCount}`;
+            questionDiv.appendChild(newAnswerInput);
+    
+            let br5 = document.createElement('br');
+            questionDiv.appendChild(br5);
+        };
+    
+        questionDiv.appendChild(addAnswerButton);
+    
+        document.getElementById('testForm').appendChild(questionDiv);
+    
+    }
+    
+    function submitTest() {
+        let testName =
+            document.getElementById('testName').value;
+        let questions = {};
+    
+        for (let i = 1; i <= questionCount; i++) {
+            let
+                questionText =
+                document.getElementsByName(`question${i}`)[0].value;
+            let answersInputs =
+                Array.from(document.getElementsByName(`answer${i}`));
+            let answers =
+                answersInputs.map((input, index) => ({
+                    [index + 1]: input.value
+                }));
+    
+            questions[i] = {
+                "question": questionText,
+                "answers": Object.assign({}, ...answers)
+            };
+        }
+    
+        let testJson = {
+            "testName": testName,
+            "questions": questions
+        };
+    
+        return testJson;
+    }
+</script>
+</div>
+<br>
+<h1>
+    Ваши тесты
+</h1>
+<div id="tests">
+    <div class="test-card card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Входное тестирование разнорабочего</h5>
+          <span class="badge rounded-pill text-bg-dark">Сварщик</span>
+          <br><br>
+          <a href="#" class="btn btn-primary">Начать прохождение</a>
+        </div>
+    </div>
+    <div class="test-card card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Входное тестирование разнорабочего</h5>
+          <span class="badge rounded-pill text-bg-dark">Сварщик</span>
+          <br><br>
+          <a href="#" class="btn btn-primary">Начать прохождение</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

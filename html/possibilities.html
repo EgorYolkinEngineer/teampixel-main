@@ -1,0 +1,497 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<style>
+    p {
+        font-size: 20px;
+    }
+
+    .floatBlock {
+       width: 400px;
+       height: 400px;
+    }
+
+    .floatTextBlock {
+        width: 400px;
+        height: 250px;
+    }
+
+    .pricesTableImg {
+        display: none;
+    }
+
+    @media (max-width: 900px) {
+        #pricesTable {
+            display: none;
+        }
+
+        .floatBlock {
+            width: 100%;
+            height: 400px;
+        }
+
+        .floatTextBlock {
+            width: 100%;
+        }
+
+        .floatBlock img {
+            width: 100%;
+            height: 300px;
+        }
+
+        .pricesTableImg {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+
+<style>
+    #container {
+        width: 100%;
+        height: 300px;
+    }
+
+</style>
+
+<script src="https://mapgl.2gis.com/api/js/v1"></script>
+
+
+<div class="container" style="margin-top: 30px;">
+    <div class="row">
+        <div class="col-12 col-sm-10 offset-sm-1">
+            <div id="firstPage">
+                <img style="width: 100%; border-radius: 30px; height: 300px; object-fit: cover;"
+                     src="/static/images/svarshik2.jpeg"
+                     alt="">
+
+                <h1 style="font-weight: bolder;" class="display-1 fb">Виртуальное обучение — новая эпоха</h1>
+                <p>А мы поможем вам в этом свой системой VR тестирования и платформой для этого</p>
+                <div id="possibilities" style="margin: 30px 0 60px 0;" class="d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                         class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="fb">
+                Твоё обучение <mark>в надёжных руках</mark>!
+            </h1>
+            <br>
+            <div class="row">
+                <div class="col d-flex" style="margin-top: 30px; justify-content: flex-end;">
+                    <ul class="list-group" style="max-width: 400px;">
+                        <li class="list-group-item active" aria-current="true">
+                            <svg style="color: green; background: white; border-radius: 500px; padding: 5px;"
+                                 xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                 class="bi bi-battery-charging" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                            </svg>
+
+                            <span style="font-size: 20px;">
+                                Освоить новую профессию
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            <svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 fill="currentColor" class="bi bi-x"
+                                 viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                            Учиться на непонятных курсах
+                        </li>
+                        <li class="list-group-item">
+                            <svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 fill="currentColor" class="bi bi-x"
+                                 viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                            Ходить на неоплачиваемые стажировки
+                        </li>
+                    </ul>
+                </div>
+                <div class="col d-flex" style="margin-top: 30px;">
+                    <div class="floatBlock d-flex justify-content-center align-items-center"
+                         style="background: rgb(240, 240, 240);">
+                        <img style="border-radius: 500px; width: 350px; height: 350px; object-fit: cover;"
+                             src="/static/images/svarshik.jpeg" alt="">
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col d-flex" style="margin-top: 30px; justify-content: flex-end;">
+                    <div class="floatBlock d-flex justify-content-center align-items-center"
+                         style="background: rgb(240, 240, 240);">
+                        <img style="border-radius: 500px; width: 350px; height: 350px; object-fit: cover;"
+                             src="/static/images/vr.jpeg" alt="">
+
+                    </div>
+                </div>
+                <div class="col" style="margin-top: 30px;">
+                    <div class="floatTextBlock">
+                        <h1>Используем VR технологии!</h1>
+                        <p>Специально разработанная VR система тренировок даст наилучший опыт</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex" style="justify-content: flex-end;">
+                    <div class="floatTextBlock">
+                        <h1>Всегда есть куда обратиться</h1>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="floatBlock d-flex justify-content-center align-items-center"
+                         style="background: rgb(240, 240, 240);">
+                        <img style="border-radius: 500px; width: 350px; height: 350px; object-fit: cover;"
+                             src="/static/images/stock/chat.jpg" alt="">
+
+                    </div>
+                </div>
+            </div>
+            <div id="implementation" style="margin: 60px 0 60px 0;" class="d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                     class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
+            <h1 class="fb"><mark>Внедряй</mark> нашу систему!
+            </h1>
+            <br>
+            <div>
+                <p>Тут будет текст</p>
+            </div>
+            <div id="reviews" style="margin: 60px 0 60px 0;" class="d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                     class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
+            <h1 class="fb">Наши
+                <mark>отзывы</mark>
+            </h1>
+            <br>
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="http://s1.picswalls.com/wallpapers/2017/12/10/4k-desktop-wallpaper_110627716_312.jpg"
+                             class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="http://s1.picswalls.com/wallpapers/2017/12/10/4k-desktop-wallpaper_110627716_312.jpg"
+                             class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="http://s1.picswalls.com/wallpapers/2017/12/10/4k-desktop-wallpaper_110627716_312.jpg"
+                             class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div id="tarifs" style="margin: 60px 0 60px 0;" class="d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                     class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
+            <h1 class="fb">Бюджетные
+                <mark>тарифы</mark>
+                !
+            </h1>
+            <br>
+            <table class="table" id="pricesTable">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Новичок <span class="badge text-bg-danger">Не выгодно :(</span></th>
+                    <th scope="col">Знаток <span class="badge text-bg-success">Выгодно</span></th>
+                    <th scope="col">Мегамозг <span class="badge text-bg-success">Выгодно</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Алгебра</th>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Геометрия</th>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Физика</th>
+                    <td></td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Информатика</th>
+                    <td></td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Русский язык</th>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Литература</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <svg style="color: green;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 fill="currentColor"
+                                 class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">-</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Стоимость комплекта</th>
+                    <td style="color: red;">
+                        <div class="d-flex justify-content-center">
+                            3 600₽
+                        </div>
+                    </td>
+                    <td style="color: green;">
+                        <div class="d-flex justify-content-center">
+                            17 800₽
+                        </div>
+                    </td>
+                    <td style="color: green;">
+                        <div class="d-flex justify-content-center">
+                            60 000₽
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <img src="/static/images/stock/prices.png" class="pricesTableImg" alt="">
+
+            <div id="support" style="margin: 60px 0 60px 0;" class="d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                     class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
+
+            <h1 class="fb">Ответы на
+                <mark>часто задаваемые вопросы</mark>
+            </h1>
+            <br>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Вопрос #1
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            В таком блоке вопрос <code>можно выделить вот так</code>.
+                            Желательно дать ответ на него более развёрнутым.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Вопрос #2
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until
+                            the collapse plugin adds the appropriate classes that we use to style each element. These
+                            classes control the overall appearance, as well as the showing and hiding via CSS
+                            transitions. You can modify any of this with custom CSS or overriding our default variables.
+                            It's also worth noting that just about any HTML can go within the
+                            <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Вопрос #3
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
+                            collapse plugin adds the appropriate classes that we use to style each element. These
+                            classes control the overall appearance, as well as the showing and hiding via CSS
+                            transitions. You can modify any of this with custom CSS or overriding our default variables.
+                            It's also worth noting that just about any HTML can go within the
+                            <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const map = new mapgl.Map('container', {
+    key: 'Your API access key',
+    center: [55.31878, 25.23584],
+    zoom: 13,
+});
+
+const marker = new mapgl.Marker(map, {
+    coordinates: [55.31878, 25.23584],
+});
+</script>
+
+{% endblock %}

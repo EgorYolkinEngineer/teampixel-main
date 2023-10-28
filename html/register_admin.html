@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/auth.css">
+<script src="/static/js/auth.js"></script>
+
+<div class="center">
+  <div id="school-registration" class="auth">
+    <h1>Регистрация школы и администратора в системе</h1>
+    <br>
+    <div class="form-floating">
+      <input type="text" 
+            id="portal-phone"
+            class="form-control" 
+            aria-describedby="passwordHelpBlock" >
+      <label for="portal-phone">Телефон</label>
+    </div>
+    <br>
+    <div class="form-floating">
+      <input type="text" 
+            id="portal-email"
+            class="form-control" 
+            aria-describedby="passwordHelpBlock" >
+      <label for="portal-email">Электронная почта</label>
+    </div>
+    <br>
+    <div class="form-floating">
+        <input type="text" 
+              id="portal-name"
+              class="form-control" 
+              aria-describedby="passwordHelpBlock" >
+        <label for="portal-name">Название организации</label>
+      </div>
+      <br>
+      <div class="form-floating">
+          <input type="text" 
+                id="portal-inn"
+                class="form-control" 
+                aria-describedby="passwordHelpBlock" >
+          <label for="portal-inn">ИНН организации</label>
+      </div>
+      <br>
+      <div class="form-floating">
+          <input type="text" 
+                id="portal-address"
+                class="form-control" 
+                aria-describedby="passwordHelpBlock" >
+          <label for="portal-address">Адрес организации</label>
+      </div>
+      <br>
+    <!-- <div class="form-floating">
+      <input type="password" 
+            id="registration-password"
+            class="form-control" 
+            aria-describedby="passwordHelpBlock">
+      <label for="registration-password">Пароль</label>
+    </div> -->
+    <!-- <br> -->
+    <button onclick="toggleSchoolRegister();" type="button" class="btn btn-success">Далее</button>
+  </div>
+
+
+  <div id="admin-registration" class="auth d-none">
+    <h1>Данные администратора организации</h1>
+    <br>
+    <div class="form-floating">
+        <input type="text" 
+              id="registration-email"
+              class="form-control" 
+              aria-describedby="passwordHelpBlock" >
+        <label for="registration-username">Электронная почта</label>
+      </div>
+      <br>
+      <div class="form-floating">
+        <input type="text" 
+              id="registration-first-name"
+              class="form-control" 
+              aria-describedby="passwordHelpBlock" >
+        <label for="registration-name">Имя</label>
+      </div>
+      <br>
+      <div class="form-floating">
+        <input type="text" 
+              id="registration-last-name"
+              class="form-control" 
+              aria-describedby="passwordHelpBlock" >
+        <label for="registration-surname">Фамилия</label>
+      </div>
+      <br>
+      <div class="form-floating">
+        <input type="password" 
+              id="registration-password"
+              class="form-control" 
+              aria-describedby="passwordHelpBlock">
+        <label for="registration-password">Пароль</label>
+      </div>
+      <br>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="registration-flex-check">
+        <label class="form-check-label" for="registration-flex-check">
+          Принимаю условия использования
+        </label>
+      </div>
+      <br>
+      <a onclick="toggleAuth();" class="icon-link" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+        </svg>
+        У меня уже есть профиль в системе
+      </a>
+      <br><br> 
+      <a onclick="toggleSchoolRegister();" href="#">Изменить данные школы</a>
+      <br><br>
+      <button onclick="schoolRegister();" type="button" class="btn btn-success">Зарегистрировать профиль и школу</button>
+  </div>
+</div>
+{% endblock %}

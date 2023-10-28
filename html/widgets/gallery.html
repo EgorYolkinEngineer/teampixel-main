@@ -1,0 +1,139 @@
+{% include 'index.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+
+
+<div class="center-aic">
+        <div style="padding: 50px;">
+                <h1>
+                        Галерея виджетов
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+                                <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                                <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                              </svg>
+                </h1>
+        </div>
+        <div class="widget">
+                <div class="d-flex" style="flex-direction: row;">
+                        <iframe src="/widgets/stats-widget/" 
+                                frameborder="0" 
+                                width="400px" 
+                                height="450px">
+                        </iframe>
+                <div>
+                <div class="desc">
+                        <h1>Виджет статистики</h1>
+                        <p>Демонстрирует n-ную статистику сервиса</p>
+                        <div class="card" style="max-width: 500px;">
+                                <h5 class="card-header">HTML-код подключения</h5>
+                                <div class="card-body">
+                                        <pre>
+                                                <code id="stats-widget" style="padding: 0 10px 0 10px; max-width: 500px; border-radius: 10px;" 
+                                                class="language-html">
+&lt;iframe src=&quot;http://127.0.0.1:8000/widgets/stats-widget/&quot; 
+frameborder=&quot;0&quot; 
+width=&quot;400px&quot; 
+height=&quot;450px&quot;&gt;
+&lt;/iframe&gt;
+                                                </code>
+                                        </pre>
+                                        <a href="#" onclick="CopyElem('stats-widget');" class="btn btn-primary">Скопировать</a>
+                                </div>
+                        </div>
+                        </div>
+                </div>
+        </div>
+        <div class="widget">
+                <div class="d-flex" style="flex-direction: row;">
+                        <iframe src="/widgets/stats-widget/"
+                                frameborder="0" 
+                                width="400px" 
+                                height="450px">
+                        </iframe>
+                <div>
+                <div class="desc">
+                        <h1>Виджет статистики<br> пользователей</h1>
+                        <p>Демонстрирует n-ную статистику пользователей</p>
+                        <div class="card" style="max-width: 500px;">
+                                <h5 class="card-header">HTML-код подключения</h5>
+                                <div class="card-body">
+                                        <pre>
+                                                <code id="stats-widget" style="padding: 0 10px 0 10px; max-width: 500px; border-radius: 10px;" 
+                                                class="language-html">
+&lt;iframe src=&quot;http://127.0.0.1:8000/widgets/stats-widget/&quot; 
+frameborder=&quot;0&quot; 
+width=&quot;400px&quot; 
+height=&quot;450px&quot;&gt;
+&lt;/iframe&gt;
+                                                </code>
+                                        </pre>
+                                        <a href="#" onclick="CopyElem('stats-widget');" class="btn btn-primary">Скопировать</a>
+                                </div>
+                        </div>
+                        </div>
+                </div>
+        </div>
+        <div class="widget">
+                <div class="d-flex" style="flex-direction: row;">
+                        <iframe src="/widgets/stats-widget/"
+                                frameborder="0" 
+                                width="400px" 
+                                height="450px">
+                        </iframe>
+                <div>
+                <div class="desc">
+                        <h1>Виджет статистики<br>нагрузки на сервис</h1>
+                        <p>Демонстрирует n-ную статистику нагрузки на сервис</p>
+                        <div class="card" style="max-width: 500px;">
+                                <h5 class="card-header">HTML-код подключения</h5>
+                                <div class="card-body">
+                                        <pre>
+                                                <code id="stats-widget" style="padding: 0 10px 0 10px; max-width: 500px; border-radius: 10px;" 
+                                                class="language-html">
+&lt;iframe src=&quot;http://127.0.0.1:8000/widgets/stats-widget/&quot; 
+frameborder=&quot;0&quot; 
+width=&quot;400px&quot; 
+height=&quot;450px&quot;&gt;
+&lt;/iframe&gt;
+                                                </code>
+                                        </pre>
+                                        <a href="#" onclick="CopyElem('stats-widget');" class="btn btn-primary">Скопировать</a>
+                                </div>
+                        </div>
+                        </div>
+                </div>
+        </div>
+</div> 
+
+<div id="copy"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+<script>
+        hljs.highlightAll();
+</script>
+
+<script>
+    function CopyElem(elem_id) {
+        let text = document.getElementById(elem_id).innerHTML;
+
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.getElementById('copy').appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+                document.execCommand('copy');
+                showToast('Скопировано в буфер обмена');
+        } catch (err) {
+                showToast('Ошибка копирования!');
+        }
+        document.getElementById('copy').removeChild(textArea);
+}
+</script>
+{% endblock %}
+        

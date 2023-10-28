@@ -1,0 +1,92 @@
+h1 {
+    font-weight: 900;
+}
+
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* center justify-content-center */
+.center-jcc {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* center align-items-center */
+.center-aic {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    
+}
+
+.command-badge {
+    padding: 10px 30px 10px 30px;
+    border-radius: 50px;
+    background: rgb(52, 52, 52);
+    
+    margin: 10px;
+}
+
+.command-badge a {
+    text-decoration: none;
+    color: white;
+}
+
+.widget {
+    margin-top: 50px;
+}
+
+.profile-avatar {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20px 0 20px 0;
+}
+
+.profile-margin {
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+
+.d-none {
+    display: none;
+}
+
+.test-card {
+    margin-top: 20px;
+}
+
+.navbar {
+    z-index: 9999;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.left-profile-navbar {
+    position: fixed;
+    top: 60px;
+    z-index: 1;
+    margin: 20px;
+    border-radius: 20px;
+}
