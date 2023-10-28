@@ -1,5 +1,5 @@
-async function getDepartaments() {
-    let response = await fetch('/api/v1/school/all', {
+async function getDepartments() {
+    let response = await fetch('/api/v1/departmens/all/', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ async function getUserTests() {
 
 	if (status === 200) {
         console.log(result);
-        
+
         let select = document.getElementById('selectDepartment');
 
         result.forEach(function(item) {
