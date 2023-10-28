@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 
 {% block content %}
+<script src="/static/js/auth.js"></script>
 <div class="left-profile-navbar d-flex flex-column flex-shrink-0 p-3 bg-dark" style="width: 280px;">
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -30,10 +31,11 @@
       <li>
         <a href="/profile/appeals/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Мои обращения
+          Мои обращения 
         </a>
       </li>
       <hr>
+      {% if role == "HR" or role == "ADMIN" or role == "SUPERUSER" %}
       Администратор, представитель предприятия, HR
       <li>
         <a href="/profile/applications/" class="nav-link link-light">
@@ -66,13 +68,16 @@
         </a>
       </li>
       <hr>
-      Администратор
+      {% endif %}
+
+      {% if role == "ADMIN" or role == "SUPERUSER" %}
       <li>
         <a href="/settings/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Настройки
         </a>
       </li>
+      {% endif %}
     </ul>
   </div>
 <div class="d-flex justify-content-center">
@@ -81,13 +86,12 @@
             <img src="https://100biografiy.ru/wp-content/uploads/2020/06/a4c1a57aca6a043b6eefafc7d21533b2.1000x1000x1.jpg" 
             class="rounded-circle profile-avatar" alt="...">
         </div>
-        <h1>
-            Робин Сергей Дмитриевич
-        </h1>
+        <h1 id="fullName"></h1>
         <div class="d-flex" style="justify-content: space-between;">
             <div>
                 <span class="badge rounded-pill text-bg-dark">{{ role }}</span>
-                <span class="badge rounded-pill text-bg-dark">Школа газпрома</span>
+                <span id="department" class="badge rounded-pill text-bg-dark">Не указана специализация</span>
+                <span id="portal" class="badge rounded-pill text-bg-dark">Нет школы</span>
             </div>
             <div>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -102,17 +106,15 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <input type="text" class="form-control" placeholder="Имя">
+                          <input id="editFirstName" type="text" class="form-control" placeholder="Имя">
                           <br>
-                          <input type="text" class="form-control" placeholder="Фамилия">
+                          <input id="editLastName" type="text" class="form-control" placeholder="Фамилия">
                           <br>
-                          <input type="text" class="form-control" placeholder="Отчество">
-                          <br>
-                          <input type="text" class="form-control" placeholder="Дата рождения">
+                          <input id="editPatronymic" type="text" class="form-control" placeholder="Отчество">
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Understood</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                          <button type="button" class="btn btn-primary">Изменить</button>
                         </div>
                       </div>
                     </div>
@@ -120,7 +122,7 @@
             </div>
         </div>
         <br>
-        <div class="alert alert-danger" role="alert">
+        <div id="fill-profile-info-alert" class="alert alert-danger d-none" role="alert">
             Пожалуйста, заполните информацию о себе подробнее
         </div> 
         <br>
@@ -129,6 +131,7 @@
             
             {% endblock %}
         </div>
+        <script>getUser()</script>
     </div>
 </div>
 {% endblock %}

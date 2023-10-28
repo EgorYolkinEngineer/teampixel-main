@@ -97,13 +97,16 @@
     
             questions[i] = {
                 "question": questionText,
-                "answers": Object.assign({}, ...answers)
+                "answers": Object.assign({}, ...answers), 
             };
         }
+
+        let departmentName = document.getElementById("departmentName").value;
     
         let testJson = {
-            "testName": testName,
-            "questions": questions
+            "name": testName,
+            "department_name": departmentName,
+            "content": questions
         };
     
         return testJson;
