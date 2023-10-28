@@ -12,3 +12,9 @@ class ReadUser(Base):
     patronymic: str | None
     birth_date: datetime | None
     role: Role
+
+
+class UpdateUser(Base):
+    first_name: str
+    last_name: str
+    patronymic: str | None
