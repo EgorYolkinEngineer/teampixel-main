@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from starlette.status import HTTP_400_BAD_REQUEST
+
 from core.exceptions import AlreadyExistError
-from core.service import generic_service
 from src.auth.service import get_worker_or_403, get_hr_or_403
-from src.courses.models import Test
 from src.courses.schemas import TestContent
 from src.users.models import User
 from src.courses.services import test_service
@@ -12,15 +11,9 @@ from src.courses.services import test_service
 test_router = APIRouter(prefix="/tests", tags=["Test"])
 
 
-@test_router.get("/all")
-async def test_list():
-    service = await generic_service(Test)
-    return await service.all()
-
-
 @test_router.get("/user")
-async def my_tests(user: User = Depends(get_worker_or_403)):
-    return await user.tests
+async def my_tests(user: User = Depends(get_worker_or_403)) -> list[TestContent]:
+    return user.tests
 
 
 @test_router.post("/create")
