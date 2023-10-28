@@ -23,7 +23,7 @@ async def create_school(data: SchoolRegister) -> ResponseRegisterUser:
         )
 
 
-@portal_router.get("/all")
+@department_router.get("/all")
 async def departments_list() -> list[ReadDepartment]:
     service = await generic_service(Department)
     return await service.all()

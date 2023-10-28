@@ -29,15 +29,15 @@ async def lifespan(app: FastAPI):
 
 def http_exception_handler(request: Request, exc: HTTPException):
     print(exc.detail)
-    return templates.TemplateResponse(f'errors/{exc.status_code}.html', {'request': request})
+    return templates.TemplateResponse(f"errors/{exc.status_code}.html", {"request": request})
 
 
 def http_404_exception_handler(request: Request, exc: HTTPException):
-    return templates.TemplateResponse(f'errors/{exc.status_code}.html', {'request': request})
+    return templates.TemplateResponse(f"errors/{exc.status_code}.html", {"request": request})
 
 
 exception_handlers = {
-    404: http_404_exception_handler, 
+    404: http_404_exception_handler,
     401: http_exception_handler,
     403: http_exception_handler,
     404: http_exception_handler,
@@ -46,11 +46,12 @@ exception_handlers = {
 
 # Main app
 app = FastAPI(
-    title=settings.APP_NAME, debug=settings.DEBUG, 
-    version=settings.VERSION, lifespan=lifespan, 
-    exception_handlers=exception_handlers
+    title=settings.APP_NAME,
+    debug=settings.DEBUG,
+    version=settings.VERSION,
+    lifespan=lifespan,
+    exception_handlers=exception_handlers,
 )
-
 
 
 # Admin settings
@@ -67,6 +68,10 @@ admin = CustomAdmin(
 
 
 admin.add_view(models_views.UserAdmin)
+admin.add_view(models_views.DepartmentAdmin)
+admin.add_view(models_views.PortalAdmin)
+admin.add_view(models_views.TestAdmin)
+admin.add_view(models_views.CourseAdmin)
 
 
 # CORS middleware
