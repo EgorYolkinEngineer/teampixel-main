@@ -28,7 +28,8 @@ async def add_models() -> int:
             if model == User:
                 await user_service.bulk_add(values)
             else:
-                await generic_service(model)
+                service = await generic_service(model)
+                await service.bulk_add(values)
         except AlreadyExistError as e:
             sys.stdout.write(f"{e}\n")
             continue
