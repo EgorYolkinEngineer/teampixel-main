@@ -13,7 +13,10 @@ test_router = APIRouter(prefix="/tests", tags=["Test"])
 
 @test_router.get("/user")
 async def my_tests(user: User = Depends(get_worker_or_403)) -> list[TestContent]:
-    return user.tests
+    try:
+        return user.department.tests
+    except AttributeError:
+        raise HTTPException(HTTP_400_BAD_REQUEST, "Сотрудник не привязан ни к одному из отделов")
 
 
 @test_router.post("/create")
