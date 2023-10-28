@@ -26,6 +26,9 @@ class Department(Base):
     portal_id: Mapped[UUID] = mapped_column(ForeignKey("portals_portal.id"))
     portal: Mapped[Portal] = relationship(Portal, lazy="selectin")
     tests: Mapped[list["Test"]] = relationship("Test", back_populates="department", lazy="selectin")
+    courses: Mapped[list["Course"]] = relationship(
+        "Course", back_populates="department", lazy="selectin"
+    )
 
 
 class UserDepartment(Base):
