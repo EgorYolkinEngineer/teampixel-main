@@ -2,8 +2,8 @@ services:
   web:
     build: .
     command: >
-      sh -c './wait-for-it.sh db:5432 && alembic upgrade head && 
-      python core/cmds.py loaddata && uvicorn src.main:app --host 0.0.0.0 --port 8000'
+      sh -c './wait-for-it.sh db:5432 && alembic upgrade head 
+      && uvicorn src.main:app --host 0.0.0.0 --port 8000'
     ports:
       - '8000:8000'
     env_file:
