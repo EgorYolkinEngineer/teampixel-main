@@ -77,3 +77,8 @@ async def profile_education(request: Request):
 @templates_router.get("/school/create/")
 async def auth(request: Request):
     return templates.TemplateResponse("register_admin.html", {"request": request})
+
+
+@templates_router.get("/company/")
+async def auth(request: Request):
+    return templates.TemplateResponse("company.html", {"request": request})
