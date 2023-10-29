@@ -78,6 +78,8 @@ docker-compose up --build
 1. Установите redis
 2. Установите postgreSQL
 3. В корне проекта создайте (если его нет), и/или заполните файл .env содержимым из .env.example:
+==Если вы поднимаете не через докер, то обязательно укажите в POSTGRES_HOST установите 127.0.0.1, а если через Docker, то установите db (что и стоит по умолчанию)==
+
 ```bash
 DEBUG=0     # Отключение DEBUG режима
 SECRET_KEY=test_secret_key  # Ключ для генерации JWT
@@ -110,6 +112,7 @@ TEST_POSTGRES_HOST=db
 TEST_POSTGRES_PORT=5432
 
 ```
+
 4. Установите зависимости:
 ```bash
 python3 -m pip install -r requirements.txt

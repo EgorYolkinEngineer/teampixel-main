@@ -22,7 +22,8 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       
       <script>
-        const ctx = document.getElementById('myChart');
+        async function loadAnalytics() {
+            const ctx = document.getElementById('myChart');
 
         let response = await fetch('/api/v1/users/roles/count/', {
             method: 'GET',
@@ -41,10 +42,10 @@
                         'HR менеджеры', 'Обучающиеся'],
                 datasets: [{
                 label: '# of Votes',
-                data: [result["admin_users"], 
-                        result["superuser_users"], 
-                        result["hr_users"],
-                        result["worker_users"]],
+                data: [result["ADMIN"], 
+                        result["SUPERUSER"], 
+                        result["HR"],
+                        result["WORKER"]],
                 borderWidth: 1
                 }]
             },
@@ -57,6 +58,9 @@
             }
             });
         }
+        }
+
+        loadAnalytics();
       </script>
 </div>
 
