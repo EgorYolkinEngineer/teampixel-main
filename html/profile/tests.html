@@ -1,25 +1,14 @@
 {% extends 'profile/profile.html' %}
 
 {% block profile_content %}
+<script src="/static/js/tests.js"></script>
 <h1>
     Доступные тесты
 </h1>
 <div id="tests">
-    <div class="test-card card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Входное тестирование разнорабочего</h5>
-          <span class="badge rounded-pill text-bg-dark">Сварщик</span>
-          <br><br>
-          <a href="#" class="btn btn-primary">Начать прохождение</a>
-        </div>
-    </div>
-    <div class="test-card card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Входное тестирование разнорабочего</h5>
-          <span class="badge rounded-pill text-bg-dark">Сварщик</span>
-          <br><br>
-          <a href="#" class="btn btn-primary">Начать прохождение</a>
-        </div>
-    </div>
+  <div class="alert alert-secondary" role="alert">
+    На ваш профиль не назначено тестов
+  </div>
 </div>
+<script>getUserTests();</script>
 {% endblock %}

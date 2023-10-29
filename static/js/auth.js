@@ -49,6 +49,37 @@ async function getUser() {
 }
 
 
+async function updateUser() {
+	let firstName = document.getElementById("editFirstName").value;
+	let lastName = document.getElementById("editLastName").value;
+	let patronymic = document.getElementById("editPatronymic").value; 
+
+	let response = await fetch('/api/v1/users/update', {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			first_name: firstName, 
+			last_name: lastName,
+			patronymic: patronymic
+		})
+	})
+	let status = response.status
+	let result = await response.json()
+
+	if (status === 200) {
+		location.reload();
+	} else if (status === 422) {
+		showToast(result['detail'][0]['msg'])
+	} else if (status === 400) {
+		showToast(result['detail'])
+	} else {
+		showToast('неизвестная ошибка!')
+	}
+}
+
+
 async function register() {
 	let email = document.getElementById('registration-email')
 	let firstName = document.getElementById('registration-first-name')
@@ -181,10 +212,16 @@ async function login() {
 							  "expires=" + expirationDate.toUTCString() + 
 							  "; path=/;";
 			document.cookie = "refresh_token=" + result['refresh_token'] + "; ";
-
-			setTimeout(() => {
-				location.href = '/profile/'
-			}, '2000')
+			
+			if (result["user"]["role"] === "SUPERUSER") {
+				setTimeout(() => {
+					location.href = '/dashboard/admin/'
+				}, '2000')
+			} else {
+				setTimeout(() => {
+					location.href = '/profile/'
+				}, '2000')
+			}
 		} else if (status === 422) {
 			showToast(result['detail'][0]['msg'])
 		} else if (status === 400) {

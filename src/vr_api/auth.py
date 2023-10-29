@@ -1,5 +1,5 @@
 import aiohttp
-from aiohtp.client import ContentTypeError
+from aiohttp.client import ContentTypeError
 
 from src.users.models import User
 from src.vr_api.urls import SIGNUP, SINGIN, PROFILE, REFRESH
