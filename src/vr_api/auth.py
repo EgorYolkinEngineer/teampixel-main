@@ -19,7 +19,7 @@ class VRAuthService:
             token_pairs = await self.signin(credentials)
         return token_pairs
 
-    async def signup(self, data: dict[str, str]):
+    async def signup(self, data: dict[str, str]) -> dict[str, dict | str]:
         async with aiohttp.ClientSession() as session:
             async with session.post(SIGNUP, json=data) as response:
                 return await response.json()
@@ -29,9 +29,14 @@ class VRAuthService:
             async with session.post(SINGIN, json=data) as response:
                 return await response.json()
 
-    async def profile(self, token):
+    async def profile(self, token: str) -> dict[str, str]:
         headers = self.header.copy()
         headers.update({"Authorization": token})
         async with aiohttp.ClientSession(headers=headers) as session:
             async with session.get(PROFILE) as response:
+                return await response.json()
+
+    async def refresh(self, token: str) -> dict[str, dict | str]:
+        async with aiohttp.ClientSession(headers=self.header) as session:
+            async with session.post(REFRESH, json={"token": token}) as response:
                 return await response.json()
