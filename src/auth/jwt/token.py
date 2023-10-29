@@ -24,7 +24,7 @@ class TokenService(AbstractToken):
         return Tokens(access_token=access_token, refresh_token=refresh_token)
 
     async def generate_access_token(self, user: User) -> str:
-        expire = datetime.utcnow() + timedelta(seconds=self.access_token_lifetime)
+        expire = datetime.utcnow() + timedelta(minutes=self.access_token_lifetime)
         payload = {
             "token_type": "access",
             "user_id": str(user.id),

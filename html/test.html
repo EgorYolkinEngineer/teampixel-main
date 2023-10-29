@@ -1,64 +1,26 @@
-{% extends 'index.html' %}
+{% extends 'profile/profile.html' %}
 
-{% block content %}
+{% block profile_content %}
+<script src="/static/js/tests.js"></script>
 
-<div class="center">
-    <div style="width: 50%;">
-        <div class="card">
-            <div class="card-body">
-              <h2>Входное тестирование сварщиков</h1>
-              Текст вопроса?
-              <br>
-              <br>
+<h1 id="testName">Название теста</h1>
+<span id="testDepartment" class="badge rounded-pill text-bg-dark">Сварщик</span>
+<br><br>
 
-              <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                          Вариант 1
-                        </label>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Вариант 2
-                        </label>
-                      </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Вариант 3
-                        </label>
-                      </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Вариант 4
-                        </label>
-                      </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Вариант 5
-                        </label>
-                      </div>
-                </li>
-                <br>
-                <button type="button" class="btn btn-dark">К следующему вопросу</button>
-                <br>
-              </ul>
-            </div>
-          </div>
-    </div>
+
+<div id="testForms">
 </div>
 
+<div id="test-result-success" class="alert alert-success d-none" role="alert">
+    Результат тестирования: <span class="testResult">90</span>% теста решено верно
+</div>
+<div id="test-result-danger" class="alert alert-danger d-none" role="alert">
+    Результат тестирования: <span class="testResult">20</span>% теста решено верно
+</div>
+
+<button type="button" class="btn btn-dark" onclick="submitTest();">
+    Завершить тестирование
+</button>
+
+<script>getTest("{{ test_id }}");</script>
 {% endblock %}

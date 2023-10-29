@@ -1,44 +1,102 @@
-localStorage.setItem('videos', JSON.stringify({}));
+async function getUserTests() {
+    let response = await fetch('/api/v1/tests/user', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	})
 
+    let status = response.status
+	let result = await response.json()
 
-function addVideo() {
-    let elem = document.getElementById('lessonVideoLink');
-    let link = elem.value;
-    elem.value = '';
+    if (status === 200) {
+        if (result.length > 0) {
+            let content = '';
+            for (let item in result) {
+                let elem = result[item];
 
-    let videos = JSON.parse(localStorage.getItem('videos'));
-    videos[link] = link;
-    localStorage.setItem('videos', JSON.stringify(videos));
-    updateVideos();
-}
-
-function deleteAllVideos() {
-    localStorage.setItem('videos', JSON.stringify({}));
-    updateVideos();
-
-}
-
-function deleteVideo(link) {
-    let videos = JSON.parse(localStorage.getItem('videos'));
-    delete videos[link];
-    localStorage.setItem('videos', JSON.stringify(videos));
-    updateVideos();
-}
-
-function updateVideos() {
-    let videos = JSON.parse(localStorage.getItem('videos'));
-    let block = document.getElementById('lessonVideos');
-    let content = '';
-
-    for (let item in videos) {
-        let html = '<p><svg onclick="deleteVideo(\'' + item + '\');" style="color: red; cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="16"' +
-                   'height="16" fill="currentColor"' +
-                   '     class="bi bi-trash" viewBox="0 0 16 16">' +
-                   '    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>' +
-                   '    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>' +
-                   '</svg>' + item +
-                    '</p>'
-        content += html;
+                let html = `
+                <div class="test-card card w-100">
+                    <div class="card-body">
+                    <h5 class="card-title">${elem["name"]}</h5>
+                    <span class="badge rounded-pill text-bg-dark">${elem["department_name"]}</span>
+                    <br><br>
+                    <a href="/test/${elem["id"]}" class="btn btn-primary">Начать прохождение</a>
+                    </div>
+                </div><br>
+                `
+                content += html;
+            }
+            let block = document.getElementById('tests');
+            block.innerHTML = content;
+        }
+    } else {
+        showToast("неизвестная ошибка")
     }
+}
 
-    block.innerHTML = content;
+
+async function getTest(test_id) {
+    let response = await fetch('/api/v1/tests/' + test_id, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	})
+
+    let status = response.status
+	let result = await response.json()
+
+    if (status === 200) {
+        console.log(result);
+
+        document.getElementById("testName").innerHTML = result["name"];
+        document.getElementById("testDepartment").innerHTML = result["department_name"];
+
+        let block = document.getElementById('testForms');
+        
+        for (let item in result["content"]) {
+            let elem = result["content"][item];
+            let form = document.createElement("form");
+            let formHTML = `<form><p>${elem["question"]}</p>`;
+
+            for (let answer in elem["answers"]) {
+                formHTML += `
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                    ${elem["answers"][answer]}
+                    </label>
+                </div>
+                `;
+            }
+            form.innerHTML = formHTML + "</form><br>";
+
+            console.log(elem["answers"]);
+
+            block.innerHTML += '<form>' + form.innerHTML + '</form>';
+        }
+    } else {
+        showToast("неизвестная ошибка")
+    }
+}
+
+
+function generateRandomNumber() {
+    return Math.floor(Math.random() * 100) + 1;
+}
+
+
+function submitTest() {
+    let number = generateRandomNumber();
+
+    document.querySelector(".testResult").innerHTML = number;
+
+    if (number < 50) {
+        document.getElementById("test-result-danger").classList.remove("d-none");
+        document.getElementById("test-result-success").classList.set("d-none");
+    } else {
+        document.getElementById("test-result-success").classList.remove("d-none");
+        document.getElementById("test-result-danger").classList.set("d-none");
+    }
+}

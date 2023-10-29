@@ -17,4 +17,4 @@ class ReadUser(Base):
 class UpdateUser(Base):
     first_name: str
     last_name: str
-    patronymic: str | None
+    patronymic: str | None = None

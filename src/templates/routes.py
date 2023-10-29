@@ -29,11 +29,10 @@ async def auth(request: Request):
 
 
 @templates_router.get("/test/{test_id}/")
-async def profile_tests(request: Request, test_id: int):
+async def profile_tests(request: Request, test_id: str):
     return templates.TemplateResponse("test.html", {"request": request, 
                                                              "test_id": test_id})
-    
-    
+
 
 @templates_router.get("/base/tests/")
 async def profile_tests(request: Request, user: User = Depends(get_user_or_401)):
@@ -82,3 +81,11 @@ async def auth(request: Request):
 @templates_router.get("/company/")
 async def auth(request: Request):
     return templates.TemplateResponse("company.html", {"request": request})
+
+
+@templates_router.get("/course/{course_id}/")
+async def profile_tests(request: Request, course_id: str):
+    return templates.TemplateResponse("profile/course.html", {"request": request, 
+                                                             "course_id": course_id})
+    
+    

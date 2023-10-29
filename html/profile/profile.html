@@ -1,6 +1,15 @@
 {% extends 'index.html' %}
 
 {% block content %}
+
+<style>
+  @media (max-width: 1200px) {
+    .left-profile-navbar {
+      display: none!important;
+    }
+  }
+</style>
+
 <script src="/static/js/auth.js"></script>
 <div class="left-profile-navbar d-flex flex-column flex-shrink-0 p-3 bg-dark" style="width: 280px;">
     <ul class="nav nav-pills flex-column mb-auto">
@@ -28,12 +37,12 @@
           Мои результаты
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/profile/appeals/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Мои обращения 
         </a>
-      </li>
+      </li> -->
       <hr>
       {% if role == "HR" or role == "ADMIN" or role == "SUPERUSER" %}
       Администратор, представитель предприятия, HR
@@ -83,7 +92,7 @@
 <div class="d-flex justify-content-center">
     <div class="profile-margin">
         <div class="d-flex justify-content-center">
-            <img src="https://100biografiy.ru/wp-content/uploads/2020/06/a4c1a57aca6a043b6eefafc7d21533b2.1000x1000x1.jpg" 
+            <img style="height: 300px; object-fit: cover;" src="https://tn-grupp.ru/files/gallery/193/big/svr-2_1622637754.jpg" 
             class="rounded-circle profile-avatar" alt="...">
         </div>
         <h1 id="fullName"></h1>
@@ -117,7 +126,7 @@
                         </button>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                          <button type="button" class="btn btn-primary">Изменить</button>
+                          <button onclick="updateUser();" type="button" class="btn btn-primary">Изменить</button>
                         </div>
                       </div>
                     </div>
