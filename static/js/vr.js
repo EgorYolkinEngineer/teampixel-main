@@ -19,8 +19,7 @@ async function getUserModules() {
                 <div class="card" style="width: 15rem;">
                     <img src="/static/images/vr2.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h1>Сварщик</h1>
-                        <p class="card-text">${elem["name"]}</p>
+                        <h1>${elem["name"]}</h1>
                         <a href="${elem["urlFile"]}>
                             <button type="button" class="btn btn-dark">Загрузить</button>
                         </a>
