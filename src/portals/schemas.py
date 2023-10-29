@@ -1,14 +1,13 @@
 from uuid import UUID
-from pydantic import model_validator, validate_email
+from pydantic import model_validator
 
 from core.exceptions import ValidationError
-from core.schemas import Base
+from core.schemas import Base, validate_email
 from src.auth.schemas import RegisterUser
 from src.users.schemas import ReadUser
 
 
-class ReadPortal(Base):
-    id: UUID
+class ReadResponsePortal(Base):
     name: str
     phone: str
     email: str
@@ -16,9 +15,13 @@ class ReadPortal(Base):
     inn: str
 
 
+class ReadPortal(ReadResponsePortal):
+    id: UUID
+
+
 class SchoolRegister(Base):
     user: RegisterUser
-    portal: ReadPortal
+    portal: ReadResponsePortal
 
     @model_validator(mode="after")
     def validate_credentials(self):
@@ -42,6 +45,10 @@ class ReadDepartment(Base):
 class UserProfile(ReadUser):
     portal: ReadPortal | None
     department: ReadDepartment | None
+
+
+class UpdateAvatar(UserProfile):
+    avatar: str
 
 
 class UserProfileRead(Base):

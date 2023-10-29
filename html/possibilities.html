@@ -170,18 +170,13 @@
             </h1>
             <br>
             <div id="t-reviews">
-                <div style="border-radius: 15px; border: 2px solid gray; max-width: 400px; padding: 10px;">
-                    <div class="toast-header">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
-                      <strong style="padding-left: 10px;" class="me-auto">Пользователь ПрофТестиум</strong>
-                    </div>
-                    <div class="toast-body">
-                      Hello, world! This is a toast message.
-                    </div>
-                </div>
+                
+            </div>
+            <div class="mb-3" style="max-width: 400px;">
+                <label for="review" class="form-label">Оставьте свой отзыв!</label>
+                <textarea class="form-control" id="review" rows="3"></textarea>
+                <br>
+                <button onclick="createReview();" type="button" class="btn btn-dark">Отправить</button>
             </div>
             <div id="tarifs" style="margin: 60px 0 60px 0;" class="d-flex justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
@@ -330,49 +325,29 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Вопрос #1
+                            Как стать сварщиком?
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            В таком блоке вопрос <code>можно выделить вот так</code>.
-                            Желательно дать ответ на него более развёрнутым.
+                            Если вы хотите стать сварщиком, вам нужно пройти соответствующее обучение и практику, а также получить соответствующие сертификаты. Существует множество курсов и программ обучения, которые помогут вам овладеть навыками сварки металла. Некоторые учебные заведения, такие как ПТУ, предлагают курсы по сварке, которые помогут вам получить базовые знания и навыки в этой области.
+                            Прежде чем начать обучение, вам следует изучить различные виды сварочных работ и требования к сварщикам. Хороший сварщик должен иметь крепкое здоровье (физическое и психическое), отличную зрительно-моторную координацию и умение сосредотачивать все свое внимание на чем-то в течение длительного времени
+                            После прохождения обучения и получения необходимых сертификатов, вы можете начать поиск работы. Зарплата сварщика зависит от места работы, опыта и желания постоянно повышать квалификацию.
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Вопрос #2
+                                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                            Как VR поможет в моём обучении?
                         </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until
-                            the collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Вопрос #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                            collapse plugin adds the appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the showing and hiding via CSS
-                            transitions. You can modify any of this with custom CSS or overriding our default variables.
-                            It's also worth noting that just about any HTML can go within the
-                            <code>.accordion-body</code>, though the transition does limit overflow.
+                            VR технологии могут помочь в обучении сварщиков, предоставляя им возможность практиковать свои навыки в безопасной и контролируемой среде. С помощью VR сварочных симуляторов, сварщики могут учиться сварке без риска получения травм или повреждения оборудования1. Виртуальная реальность также может помочь сварщикам лучше понимать процесс сварки и улучшить качество своей работы.
+                            Симуляторы сварки виртуальной реальности могут помочь сварщикам развивать навыки, такие как точность, скорость и управление оборудованием. Они также могут помочь сварщикам лучше понимать процесс сварки и улучшить качество своей работы.
+                            Например, с помощью VR-симуляторов сварки, студенты могут практиковать выбор правильного материала для сварки, оптимальную настройку газового потока, точное напряжение и правильную ампераж4.
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 from datetime import datetime
 from sqlalchemy import UUID, DateTime, ForeignKey, String, func, Enum, Boolean, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from core.config.templates import DEFAULT_AVATAR
 
 from core.models import Base
 from src.users.consts import Role
@@ -18,6 +19,7 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), index=True
     )
+    avatar: Mapped[str] = mapped_column(String, default=DEFAULT_AVATAR)
     role: Mapped[Role] = mapped_column(Enum(Role), default=Role.WORKER.value)
     is_dismissed: Mapped[bool] = mapped_column(Boolean, default=False)
 
@@ -30,6 +32,12 @@ class User(Base):
         "Portal", lazy="selectin", foreign_keys="User.portal_id"
     )
     department: Mapped["Department"] = relationship("Department", lazy="selectin")
+    
+    
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} {self.patronymic}, '\
+                f'департамент «{self.department}», '\
+                f'портал «{self.portal}»'
 
 
 class Review(Base):

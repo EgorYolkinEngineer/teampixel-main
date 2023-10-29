@@ -26,6 +26,7 @@ async function getUser() {
 		${result["user"]["first_name"]} 
 		${result["user"]["last_name"]} 
 		`
+		
 		if (result["user"]["patronymic"]) {
 			document.getElementById("fullName").innerHTML += result["user"]["patronymic"];
 			document.getElementById("editPatronymic").value = result["user"]["patronymic"]; 
@@ -39,6 +40,47 @@ async function getUser() {
 		if (result["user"]["portal"]) {
 			document.getElementById("portal").textContent = result["user"]["portal"]["name"];
 		}
+
+		console.log(result["user"]["avatar"]);
+
+		if (result["user"]["avatar"]) {
+			document.getElementById("avatar").src = "/" + result["user"]["avatar"];
+		}
+	} else if (status === 422) {
+		showToast(result['detail'][0]['msg'])
+	} else if (status === 400) {
+		showToast(result['detail'])
+	} else {
+		showToast('неизвестная ошибка!')
+	}
+}
+
+
+async function updateAvatar() {
+	var form = new FormData();
+	form.append(
+		'avatar', 
+		document.getElementById('editAvatar').files[0]
+	);
+
+	console.log(document.getElementById('editAvatar').files[0]);
+
+	// var xhr = new XMLHttpRequest();
+	// xhr.open('PATCH', '/api/v1/users/update');
+	// xhr.send(form);
+
+	// console.log(xhr.response.json());
+
+	let response = await fetch('/api/v1/users/update', {
+		method: 'PATCH',
+		body: form
+	})
+
+	let status = response.status
+	let result = await response.json()
+
+	if (status === 200) {
+		location.reload();
 	} else if (status === 422) {
 		showToast(result['detail'][0]['msg'])
 	} else if (status === 400) {
@@ -50,6 +92,7 @@ async function getUser() {
 
 
 async function updateUser() {
+	
 	let firstName = document.getElementById("editFirstName").value;
 	let lastName = document.getElementById("editLastName").value;
 	let patronymic = document.getElementById("editPatronymic").value; 
@@ -65,6 +108,7 @@ async function updateUser() {
 			patronymic: patronymic
 		})
 	})
+
 	let status = response.status
 	let result = await response.json()
 
@@ -149,6 +193,8 @@ async function register() {
 							  "expires=" + expirationDate.toUTCString() + 
 							  "; path=/;";
 
+			localStorage.setItem("user_role", result["user"]["role"]);
+
 			setTimeout(() => {
 				location.href = '/profile/'
 			}, '2000')
@@ -213,6 +259,8 @@ async function login() {
 							  "; path=/;";
 			document.cookie = "refresh_token=" + result['refresh_token'] + "; ";
 			
+			localStorage.setItem("user_role", result["user"]["role"]);
+
 			if (result["user"]["role"] === "SUPERUSER") {
 				setTimeout(() => {
 					location.href = '/dashboard/admin/'
@@ -316,6 +364,8 @@ async function schoolRegister() {
 			document.cookie = "refresh_token=" + result['refresh_token'] + "; " + 
 							  "expires=" + expirationDate.toUTCString() + 
 							  "; path=/;";
+
+			localStorage.setItem("user_role", result["user"]["role"]);
 
 			setTimeout(() => {
 				location.href = '/profile/'

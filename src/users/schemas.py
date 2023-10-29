@@ -4,8 +4,7 @@ from core.schemas import Base
 from src.users.consts import Role
 
 
-class ReadUser(Base):
-    id: UUID
+class ResponseReadUser(Base):
     email: str
     first_name: str
     last_name: str
@@ -14,7 +13,15 @@ class ReadUser(Base):
     role: Role
 
 
+class ReadUser(ResponseReadUser):
+    id: UUID
+
+
 class UpdateUser(Base):
     first_name: str
     last_name: str
     patronymic: str | None = None
+
+
+class TextReview(Base):
+    text: str

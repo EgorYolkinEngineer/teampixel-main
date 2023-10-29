@@ -1,5 +1,5 @@
 async function getDepartments() {
-    let response = await fetch('/api/v1/departments/all/', {
+    let response = await fetch('/api/v1/departments/all', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

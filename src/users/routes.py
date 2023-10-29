@@ -1,13 +1,15 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from starlette.status import HTTP_400_BAD_REQUEST
 
 from core.exceptions import NoRowsFoundError
 from core.service import generic_service
+from core.config.templates import MEDIA_DIR
 from src.auth.service import get_user_or_401
 from src.portals.schemas import UserProfileRead
-from src.users.schemas import UpdateUser
+from src.users.consts import Role
+from src.users.schemas import TextReview, UpdateUser
 from src.users.models import Review, User
 from src.users.service import user_service
 
@@ -29,9 +31,15 @@ async def update_profile(data: UpdateUser, user: User = Depends(get_user_or_401)
 
 
 @user_router.get("/reviews")
-async def reviews_list():
+async def reviews_list() -> list[TextReview]:
     service = await generic_service(Review)
     return await service.all()
+
+
+@user_router.post("/reviews/create", dependencies=[Depends(get_user_or_401)])
+async def add_review(data: TextReview) -> TextReview:
+    service = await generic_service(Review)
+    return await service.add(data.model_dump())
 
 
 @user_router.delete("/dismiss/{worker_id}")
@@ -40,3 +48,25 @@ async def dismissal(worker_id: UUID) -> UpdateUser:
         return await user_service.update(worker_id, {"department_id": None})
     except NoRowsFoundError:
         raise HTTPException(HTTP_400_BAD_REQUEST, "Такого департамента не существует")
+
+
+@user_router.put("/update/avatar")
+async def update_avatar(image: UploadFile = File(), user: User = Depends(get_user_or_401)):
+    file_extension = image.filename.split(".")[-1]
+    file_location = f"{MEDIA_DIR}/{user.id}.{file_extension}"
+    with open(file_location, "wb+") as file_object:
+        file_object.write(image.file.read())
+    await user_service.update(user.id, {"avatar": file_location})
+    return {"location": file_location}
+
+
+@user_router.get("/roles/count")
+async def role_count():
+    result = {}
+    # Сори, если что это хакатон, не смотрите на это
+    result[Role.WORKER.value] = len(await user_service.filters({"role": Role.WORKER}))
+    result[Role.HR.value] = len(await user_service.filters({"role": Role.HR.value}))
+    result[Role.ADMIN.value] = len(await user_service.filters({"role": Role.ADMIN.value}))
+    result[Role.SUPERUSER.value] = len(await user_service.filters({"role": Role.SUPERUSER.value}))
+
+    return result

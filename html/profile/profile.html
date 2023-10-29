@@ -31,29 +31,17 @@
           Мои тесты
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/profile/results/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
           Мои результаты
         </a>
-      </li>
-      <!-- <li>
-        <a href="/profile/appeals/" class="nav-link link-light">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Мои обращения 
-        </a>
       </li> -->
-      <hr>
+      <!-- <hr> -->
       {% if role == "HR" or role == "ADMIN" or role == "SUPERUSER" %}
-      Администратор, представитель предприятия, HR
+
       <li>
-        <a href="/profile/applications/" class="nav-link link-light">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Мои заявки
-        </a>
-      </li>
-      <li>
-        <a href="/base/materials/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           База уч. материалов
         </a>
@@ -65,13 +53,13 @@
         </a>
       </li>
       <li>
-        <a href="/base/employees/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           База сотрудников
         </a>
       </li>
       <li>
-        <a href="/analitics/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Аналитика по компании
         </a>
@@ -81,7 +69,7 @@
 
       {% if role == "ADMIN" or role == "SUPERUSER" %}
       <li>
-        <a href="/settings/" class="nav-link link-light">
+        <a href="/dashboard/admin/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Настройки
         </a>
@@ -92,13 +80,12 @@
 <div class="d-flex justify-content-center">
     <div class="profile-margin">
         <div class="d-flex justify-content-center">
-            <img style="height: 300px; object-fit: cover;" src="https://tn-grupp.ru/files/gallery/193/big/svr-2_1622637754.jpg" 
-            class="rounded-circle profile-avatar" alt="...">
+            <img id="avatar" style="height: 300px; object-fit: cover;" src="https://tn-grupp.ru/files/gallery/193/big/svr-2_1622637754.jpg" 
+                 class="rounded-circle profile-avatar" alt="User avatar">
         </div>
         <h1 id="fullName"></h1>
         <div class="d-flex" style="justify-content: space-between;">
             <div>
-                <span class="badge rounded-pill text-bg-dark">{{ role }}</span>
                 <span id="department" class="badge rounded-pill text-bg-dark">Не указана специализация</span>
                 <span id="portal" class="badge rounded-pill text-bg-dark">Нет школы</span>
             </div>
@@ -120,7 +107,12 @@
                           <input id="editLastName" type="text" class="form-control" placeholder="Фамилия">
                           <br>
                           <input id="editPatronymic" type="text" class="form-control" placeholder="Отчество">
+                          <!-- <br> -->
+                          <!-- <input accept="image/jpeg,image/png,image/jpg" id="editAvatar" type="file"form-control" placeholder="Отчество"> -->
                         </div>
+                        <!-- <button onclick="updateAvatar();" style="margin: 15px;" type="button" class="btn btn-success">
+                          Обновить фото профиля
+                        </button> -->
                         <button onclick="logout();" style="margin: 15px;" type="button" class="btn btn-danger">
                           Сменить профиль
                         </button>

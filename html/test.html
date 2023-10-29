@@ -18,9 +18,24 @@
     Результат тестирования: <span class="testResult">20</span>% теста решено верно
 </div>
 
-<button type="button" class="btn btn-dark" onclick="submitTest();">
+<button id="test-submin-btn" type="button" class="btn btn-dark" onclick="submitTest();">
     Завершить тестирование
 </button>
+
+<div id="vrTest" class="d-none">
+    <br><br><br>
+    <img style="width: 700px; border-radius: 15px; height: 300px; object-fit: cover;" src="https://movietvtechgeeks.com/wp-content/uploads/2016/10/playstation-vr-in-use.jpg" alt="">
+    <h1>Пройдите VR тестирование</h1>
+    <p>VR тестирование помогает быстрее развить в себе навыки профессии</p>
+
+    <div style="height: 10vh;" class="d-flex justify-content-center align-items-center">
+        <a href="/profile/vr/">
+            <button style="padding: 10px; font-size: 30px;" type="button" class="btn btn-dark">
+                Пройти
+            </button>
+        </a>
+    </div>
+</div>
 
 <script>getTest("{{ test_id }}");</script>
 {% endblock %}
