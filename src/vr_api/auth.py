@@ -6,12 +6,12 @@ from src.vr_api.urls import SIGNUP, SINGIN, PROFILE, REFRESH
 
 
 class VRAuthService:
-    header: str = {"ngrok-skip-browser-warning": "69420"}
+    header = {"ngrok-skip-browser-warning": "69420"}
 
-    def __init__(self, user: User) -> None:
+    def __init__(self, user: User | None = None) -> None:
         self.user = user
 
-    async def auth(self):
+    async def auth(self) -> dict[str, dict | str]:
         credentials = {"email": self.user.email, "password": self.user.password}
         try:
             token_pairs = await self.signup(credentials)
@@ -30,4 +30,8 @@ class VRAuthService:
                 return await response.json()
 
     async def profile(self, token):
-        pass
+        headers = self.header.copy()
+        headers.update({"Authorization": token})
+        async with aiohttp.ClientSession(headers=headers) as session:
+            async with session.get(PROFILE) as response:
+                return await response.json()
