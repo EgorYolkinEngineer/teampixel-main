@@ -14,10 +14,11 @@ from core.config.settings import settings
 from core.config.templates import STATIC_DIR, STATIC_PATH, MEDIA_DIR, MEDIA_PATH
 from core.config.redis import config_redis
 
-from src.admin_dashboard.admin import CustomAdmin
+from src.admin_dashboard.admin import CustomAdmin, CustomHR
 from src.routers import get_api_router, get_template_router
-from src.admin_dashboard import models_views
+from src.admin_dashboard import admin_models_views, hr_model_views
 from src.admin_dashboard.auth_backend import AdminAuthenticationBackend
+from src.admin_dashboard.auth_backend import HrAuthenticationBackend
 
 
 @asynccontextmanager
@@ -53,26 +54,40 @@ app = FastAPI(
     exception_handlers=exception_handlers,
 )
 
-
 # Admin settings
 admin_auth_backend = AdminAuthenticationBackend(
     settings.SECRET_KEY,
 )
-admin = CustomAdmin(
+admin_dashboard = CustomAdmin(
     app,
     base_db_session.engine,
     base_url="/dashboard/admin",
-    title="⚙️ #TeamPixel dashboard",
+    title="⚙️ Admin dashboard",
     authentication_backend=admin_auth_backend,
 )
+admin_dashboard.add_view(admin_models_views.UserAdmin)
+admin_dashboard.add_view(admin_models_views.DepartmentAdmin)
+admin_dashboard.add_view(admin_models_views.PortalAdmin)
+admin_dashboard.add_view(admin_models_views.TestAdmin)
+admin_dashboard.add_view(admin_models_views.CourseAdmin)
+admin_dashboard.add_view(admin_models_views.ReviewAdmin)
 
 
-admin.add_view(models_views.UserAdmin)
-admin.add_view(models_views.DepartmentAdmin)
-admin.add_view(models_views.PortalAdmin)
-admin.add_view(models_views.TestAdmin)
-admin.add_view(models_views.CourseAdmin)
-admin.add_view(models_views.ReviewAdmin)
+# HR settings
+hr_auth_backend = HrAuthenticationBackend(
+    settings.SECRET_KEY,
+)
+hr_dashboard = CustomHR(
+    app,
+    base_db_session.engine,
+    base_url="/dashboard/hr",
+    title="⚙️ HR dashboard",
+    authentication_backend=hr_auth_backend,
+)
+hr_dashboard.add_view(hr_model_views.CourseHR)
+hr_dashboard.add_view(hr_model_views.TestHR)
+hr_dashboard.add_view(hr_model_views.DepartmentHR)
+hr_dashboard.add_view(hr_model_views.UserHR)
 
 
 # CORS middleware

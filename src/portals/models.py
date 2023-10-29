@@ -8,6 +8,9 @@ class Company(Base):
     name: Mapped[str] = mapped_column(String, unique=True)
     author_id: Mapped[UUID] = mapped_column(ForeignKey("users_user.id"))
 
+    def __str__(self):
+        return self.name
+    
 
 class Portal(Base):
     name: Mapped[str] = mapped_column(String, unique=True)
@@ -20,6 +23,9 @@ class Portal(Base):
     admin_id: Mapped[UUID] = mapped_column(ForeignKey("users_user.id", use_alter=True))
     admin: Mapped["User"] = relationship("User", lazy="selectin", foreign_keys="Portal.admin_id")
 
+    def __str__(self):
+        return self.name
+    
 
 class Department(Base):
     name: Mapped[str] = mapped_column(String, unique=True)
@@ -29,6 +35,9 @@ class Department(Base):
     courses: Mapped[list["Course"]] = relationship(
         "Course", back_populates="department", lazy="selectin"
     )
+    
+    def __str__(self):
+        return self.name
 
 
 class UserDepartment(Base):
@@ -36,3 +45,6 @@ class UserDepartment(Base):
     department_id: Mapped[UUID] = mapped_column(ForeignKey("portals_department.id"))
     user: Mapped["User"] = relationship("User", lazy="selectin")
     department: Mapped[Department] = relationship(Department, lazy="selectin")
+
+    def __str__(self):
+        return f'{self.user}, {self.department}'

@@ -31,7 +31,7 @@ async function getUserTests() {
             block.innerHTML = content;
         }
     } else {
-        showToast("неизвестная ошибка")
+        showToast(result["detail"])
     }
 }
 
@@ -77,7 +77,7 @@ async function getTest(test_id) {
             block.innerHTML += '<form>' + form.innerHTML + '</form>';
         }
     } else {
-        showToast("неизвестная ошибка")
+        showToast(result["detail"])
     }
 }
 

@@ -12,6 +12,9 @@ class Course(Base):
     author: Mapped["User"] = relationship("User", lazy="selectin")
     department: Mapped["Department"] = relationship("Department", lazy="selectin", uselist=False)
 
+    def __str__(self):
+        return f'{self.name}, создал «{self.author}»'
+    
 
 class Test(Base):
     name: Mapped[str] = mapped_column(String)
@@ -21,14 +24,24 @@ class Test(Base):
     author: Mapped["User"] = relationship("User", lazy="selectin")
     department: Mapped["Department"] = relationship("Department", lazy="selectin", uselist=False)
 
+    def __str__(self):
+        return self.name
+    
 
 class UserCourse(Base):
     user_id: Mapped[UUID] = mapped_column(ForeignKey("users_user.id"))
     course_id: Mapped[UUID] = mapped_column(ForeignKey("courses_course.id"))
     user: Mapped["User"] = relationship("User", lazy="selectin", back_populates="courses")
 
+    
+    def __str__(self):
+        return f'Пользователь №{self.user_id}, курс №{self.course_id}'
 
 class UserTest(Base):
     user_id: Mapped[UUID] = mapped_column(ForeignKey("users_user.id"))
     test_id: Mapped[UUID] = mapped_column(ForeignKey("courses_test.id"))
     user: Mapped["User"] = relationship("User", lazy="selectin", back_populates="tests")
+
+    
+    def __str__(self):
+        return f'Пользователь №{self.user_id}, тест №{self.test_id}'

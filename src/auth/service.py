@@ -56,6 +56,7 @@ get_superuser_or_None = Authenticate(raise_exception=False, role=Role.SUPERUSER.
 get_worker_or_403 = Authenticate(role=Role.WORKER.value)
 get_admin_or_403 = Authenticate(role=Role.ADMIN.value)
 get_hr_or_403 = Authenticate(role=Role.HR.value)
+get_hr_or_None = Authenticate(raise_exception=False, role=Role.HR.value)
 
 
 class AuthService:

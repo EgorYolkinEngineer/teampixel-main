@@ -1,0 +1,21 @@
+{% extends 'profile/profile.html' %}
+
+{% block profile_content %}
+
+<script src="/static/js/vr.js">
+    
+</script>
+
+<h1>Личный кабинет 
+    <br>
+    VR тестирования</h1>
+    <br>
+    <div id="modules" class="d-flex" style="gap: 20px; max-width: 32rem; flex-wrap: wrap;">
+        <div id="fill-profile-info-alert" class="alert alert-dark" role="alert">
+            Пожалуйста, заполните информацию о себе подробнее
+        </div> 
+    </div>
+<script>
+    getUserModules();
+</script>
+{% endblock %}

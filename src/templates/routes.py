@@ -4,7 +4,7 @@ from core.config.templates import templates
 from core.custom_routers import TemplateRouter
 from src.users.consts import Role
 from src.users.models import User
-from src.auth.service import get_user_or_401
+from src.auth.service import get_user_or_401, get_worker_or_403
 
 templates_router = TemplateRouter()
 
@@ -57,6 +57,14 @@ async def profile(request: Request, user: User = Depends(get_user_or_401)):
         return templates.TemplateResponse("profile/admin.html", {"request": request, 
                                                                 "role": user.role.value})
 
+
+@templates_router.get("/profile/vr/")
+async def profile(request: Request, user: User = Depends(get_worker_or_403)):
+    print(user.role)
+    if user.role == Role.WORKER:
+        return templates.TemplateResponse("profile/vr.html", {"request": request, 
+                                                                  "role": user.role.value})
+    
 
 @templates_router.get("/profile/tests/")
 async def profile_tests(request: Request):
