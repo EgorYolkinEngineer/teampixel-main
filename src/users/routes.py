@@ -50,11 +50,9 @@ async def dismissal(worker_id: UUID) -> UpdateUser:
 
 
 @user_router.put("/update/avatar")
-async def upload_files(image: UploadFile = File(), user: User = Depends(get_user_or_401)):
+async def update_avatar(image: UploadFile = File(), user: User = Depends(get_user_or_401)):
     file_extension = image.filename.split(".")[-1]
     file_location = f"{MEDIA_DIR}/{user.id}.{file_extension}"
-
     with open(file_location, "wb+") as file_object:
         file_object.write(image.file.read())
-
-    return {"image": image, "path": file_location}
+    return {"location": file_location}
