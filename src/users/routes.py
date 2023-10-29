@@ -55,4 +55,5 @@ async def update_avatar(image: UploadFile = File(), user: User = Depends(get_use
     file_location = f"{MEDIA_DIR}/{user.id}.{file_extension}"
     with open(file_location, "wb+") as file_object:
         file_object.write(image.file.read())
+    await user_service.update(user.id, {"avatar": file_location})
     return {"location": file_location}

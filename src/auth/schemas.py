@@ -1,7 +1,7 @@
-from pydantic import model_validator, validate_email
+from pydantic import model_validator
 from core.exceptions import ValidationError
 
-from core.schemas import Base
+from core.schemas import Base, validate_email
 from src.users.schemas import ReadUser
 from src.users.utils.password_validator import validate_password
 
@@ -25,6 +25,7 @@ class RegisterUser(LoginUser):
             validate_email(self.email)
         except ValidationError as e:
             raise ValueError(str(e))
+
         return self
 
 
