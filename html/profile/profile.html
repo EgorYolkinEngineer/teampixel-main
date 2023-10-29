@@ -80,8 +80,8 @@
 <div class="d-flex justify-content-center">
     <div class="profile-margin">
         <div class="d-flex justify-content-center">
-            <img style="height: 300px; object-fit: cover;" src="https://tn-grupp.ru/files/gallery/193/big/svr-2_1622637754.jpg" 
-            class="rounded-circle profile-avatar" alt="...">
+            <img id="avatar" style="height: 300px; object-fit: cover;" src="https://tn-grupp.ru/files/gallery/193/big/svr-2_1622637754.jpg" 
+                 class="rounded-circle profile-avatar" alt="User avatar">
         </div>
         <h1 id="fullName"></h1>
         <div class="d-flex" style="justify-content: space-between;">
@@ -107,6 +107,8 @@
                           <input id="editLastName" type="text" class="form-control" placeholder="Фамилия">
                           <br>
                           <input id="editPatronymic" type="text" class="form-control" placeholder="Отчество">
+                          <br>
+                          <input accept="image/jpeg,image/png,image/jpg" id="editAvatar" type="file"form-control" placeholder="Отчество">
                         </div>
                         <button onclick="logout();" style="margin: 15px;" type="button" class="btn btn-danger">
                           Сменить профиль

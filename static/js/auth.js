@@ -26,6 +26,11 @@ async function getUser() {
 		${result["user"]["first_name"]} 
 		${result["user"]["last_name"]} 
 		`
+
+		if (response["user"]["avatar"].length > 0) {
+			document.getElementById("avatar").src += result["user"]["avatar"];
+		}
+
 		if (result["user"]["patronymic"]) {
 			document.getElementById("fullName").innerHTML += result["user"]["patronymic"];
 			document.getElementById("editPatronymic").value = result["user"]["patronymic"]; 
@@ -50,20 +55,21 @@ async function getUser() {
 
 
 async function updateUser() {
-	let firstName = document.getElementById("editFirstName").value;
-	let lastName = document.getElementById("editLastName").value;
-	let patronymic = document.getElementById("editPatronymic").value; 
+	var form = new FormData();
+	form.append('avatar', document.getElementById('avatar').files[0]);
+	form.append('first_name', document.getElementById("editFirstName").value);
+	form.append('last_name', document.getElementById("editLastName").value)
+	form.append('patronymic', document.getElementById("editPatronymic").value)
+	// let firstName = document.getElementById("editFirstName").value;
+	// let lastName = document.getElementById("editLastName").value;
+	// let patronymic = document.getElementById("editPatronymic").value; 
 
 	let response = await fetch('/api/v1/users/update', {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({
-			first_name: firstName, 
-			last_name: lastName,
-			patronymic: patronymic
-		})
+		body: form
 	})
 	let status = response.status
 	let result = await response.json()

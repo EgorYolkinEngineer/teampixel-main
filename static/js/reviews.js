@@ -38,3 +38,29 @@ async function getReviews() {
         showToast("неизвестная ошибка")
     }
 }
+
+
+async function createReview() {
+    let text = document.getElementById("review").value;
+    let response = await fetch('/api/v1/users/reviews/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            text: text
+        }),
+    })
+    let status = response.status
+    let result = await response.json()
+
+    if (status === 200) {
+        showToast('Отзыв создан!')
+
+        setTimeout(() => {
+            location.reload()
+        }, '1000')
+    } else {
+        showToast(result["detail"])
+    }
+}
