@@ -1,5 +1,5 @@
 async function getDepartments() {
-    let response = await fetch('/api/v1/departments/all/', {
+    let response = await fetch('/api/v1/departments/all', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ async function getDepartments() {
 
         result.forEach(function(item) {
             let option = document.createElement('option');
-            option.value = item.name;
+            option.value = item.id;
             option.text = item.name;
             select.appendChild(option);
         });

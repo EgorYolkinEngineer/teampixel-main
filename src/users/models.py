@@ -30,6 +30,12 @@ class User(Base):
         "Portal", lazy="selectin", foreign_keys="User.portal_id"
     )
     department: Mapped["Department"] = relationship("Department", lazy="selectin")
+    
+    
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} {self.patronymic}, '\
+                f'департамент «{self.department}», '\
+                f'портал «{self.portal}»'
 
 
 class Review(Base):

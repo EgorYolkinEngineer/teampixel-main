@@ -37,41 +37,29 @@
           Мои результаты
         </a>
       </li>
-      <!-- <li>
-        <a href="/profile/appeals/" class="nav-link link-light">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Мои обращения 
-        </a>
-      </li> -->
       <hr>
       {% if role == "HR" or role == "ADMIN" or role == "SUPERUSER" %}
       Администратор, представитель предприятия, HR
       <li>
-        <a href="/profile/applications/" class="nav-link link-light">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Мои заявки
-        </a>
-      </li>
-      <li>
-        <a href="/base/materials/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           База уч. материалов
         </a>
       </li>
       <li>
-        <a href="/base/tests/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           База тестов
         </a>
       </li>
       <li>
-        <a href="/base/employees/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           База сотрудников
         </a>
       </li>
       <li>
-        <a href="/analitics/" class="nav-link link-light">
+        <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Аналитика по компании
         </a>
@@ -81,7 +69,7 @@
 
       {% if role == "ADMIN" or role == "SUPERUSER" %}
       <li>
-        <a href="/settings/" class="nav-link link-light">
+        <a href="/dashboard/admin/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Настройки
         </a>
@@ -98,7 +86,6 @@
         <h1 id="fullName"></h1>
         <div class="d-flex" style="justify-content: space-between;">
             <div>
-                <span class="badge rounded-pill text-bg-dark">{{ role }}</span>
                 <span id="department" class="badge rounded-pill text-bg-dark">Не указана специализация</span>
                 <span id="portal" class="badge rounded-pill text-bg-dark">Нет школы</span>
             </div>

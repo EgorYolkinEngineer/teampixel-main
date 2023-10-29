@@ -31,7 +31,7 @@ async function getUserCourses() {
             block.innerHTML = content;
         }
     } else {
-        showToast("неизвестная ошибка")
+        showToast(result["detail"])
     }
 }
 
@@ -53,7 +53,7 @@ async function getCourse(pk) {
         document.getElementById("courseDepartment").innerHTML = result["department_name"];
         document.getElementById("courseContent").innerHTML = result["content"];
     } else {
-        showToast("неизвестная ошибка")
+        showToast(result["detail"])
     }
 }
 

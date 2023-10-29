@@ -149,6 +149,8 @@ async function register() {
 							  "expires=" + expirationDate.toUTCString() + 
 							  "; path=/;";
 
+			localStorage.setItem("user_role", result["user"]["role"]);
+
 			setTimeout(() => {
 				location.href = '/profile/'
 			}, '2000')
@@ -213,6 +215,8 @@ async function login() {
 							  "; path=/;";
 			document.cookie = "refresh_token=" + result['refresh_token'] + "; ";
 			
+			localStorage.setItem("user_role", result["user"]["role"]);
+
 			if (result["user"]["role"] === "SUPERUSER") {
 				setTimeout(() => {
 					location.href = '/dashboard/admin/'
@@ -316,6 +320,8 @@ async function schoolRegister() {
 			document.cookie = "refresh_token=" + result['refresh_token'] + "; " + 
 							  "expires=" + expirationDate.toUTCString() + 
 							  "; path=/;";
+
+			localStorage.setItem("user_role", result["user"]["role"]);
 
 			setTimeout(() => {
 				location.href = '/profile/'
