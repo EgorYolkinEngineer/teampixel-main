@@ -92,6 +92,11 @@ function submitTest() {
 
     document.querySelector(".testResult").innerHTML = number;
 
+    document.getElementById("test-submin-btn").style.display = "none";
+    document.getElementById("testForms").style.display = "none";
+
+    document.getElementById("vrTest").classList.remove("d-none");
+
     if (number < 50) {
         document.getElementById("test-result-danger").classList.remove("d-none");
         document.getElementById("test-result-success").classList.set("d-none");
@@ -99,4 +104,18 @@ function submitTest() {
         document.getElementById("test-result-success").classList.remove("d-none");
         document.getElementById("test-result-danger").classList.set("d-none");
     }
+}
+
+async function vrAuth() {
+    let response = await fetch('/api/v1/vr/auth/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	})
+
+    let status = response.status
+	let result = await response.json()
+
+    console.log(result, status);
 }
