@@ -32,6 +32,10 @@ class BaseService:
             await session.commit()
             return result
 
+    async def filters(self, filters: dict[str, str]):
+        async with db_session() as session:
+            return await self.repository(session).filter(filters)
+
     async def delete(self, pk):
         async with db_session() as session:
             await self.repository(session).delete(id=pk)

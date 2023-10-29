@@ -8,6 +8,7 @@ from core.service import generic_service
 from core.config.templates import MEDIA_DIR
 from src.auth.service import get_user_or_401
 from src.portals.schemas import UserProfileRead
+from src.users.consts import Role
 from src.users.schemas import TextReview, UpdateUser
 from src.users.models import Review, User
 from src.users.service import user_service
@@ -57,3 +58,15 @@ async def update_avatar(image: UploadFile = File(), user: User = Depends(get_use
         file_object.write(image.file.read())
     await user_service.update(user.id, {"avatar": file_location})
     return {"location": file_location}
+
+
+@user_router.get("/roles/count")
+async def role_count():
+    result = {}
+    # Сори, если что это хакатон, не смотрите на это
+    result[Role.WORKER.value] = len(await user_service.filters({"role": Role.WORKER}))
+    result[Role.HR.value] = len(await user_service.filters({"role": Role.HR.value}))
+    result[Role.ADMIN.value] = len(await user_service.filters({"role": Role.ADMIN.value}))
+    result[Role.SUPERUSER.value] = len(await user_service.filters({"role": Role.SUPERUSER.value}))
+
+    return result
