@@ -1,0 +1,12 @@
+{% extends 'profile/profile.html' %}
+
+{% block profile_content %}
+<script src="/static/js/courses.js"></script>
+
+<h1 id="courseName">Название курса</h1>
+<span id="courseDepartment" class="badge rounded-pill text-bg-dark">Сварщик</span>
+<br><br>
+<p style="max-width: 500px;" id="courseContent">Текст курса</p>
+
+<script>getCourse("{{ course_id }}");</script>
+{% endblock %}

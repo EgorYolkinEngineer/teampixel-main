@@ -12,3 +12,4 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+

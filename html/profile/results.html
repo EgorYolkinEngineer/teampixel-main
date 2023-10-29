@@ -2,4 +2,55 @@
 
 {% block profile_content %}
 
+<h1>Ваши результаты</h1>
+<br>
+
+<div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пн', 'Сб', 'Вс'],
+        datasets: [{
+          label: 'Кол-во пройденных тестов',
+          data: [1, 0, 0, 1, 0, 0, 0],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+<br>
+
+<p>Промежуточное тестирование сварщиков</p>
+<div id="test-result-success" class="alert alert-success" role="alert">
+    Результат тестирования: <span class="testResult">90</span>% теста решено верно
+</div>
+<p>Варка труб</p>
+<div id="test-result-danger" class="alert alert-danger" role="alert">
+    Результат тестирования: <span class="testResult">20</span>% теста решено верно
+</div>
+<p>Входное тестирование сварщиков</p>
+<div id="test-result-success" class="alert alert-success" role="alert">
+    Результат тестирования: <span class="testResult">35</span>% теста решено верно
+</div>
+<p>Математическое тестирование</p>
+<div id="test-result-danger" class="alert alert-success" role="alert">
+    Результат тестирования: <span class="testResult">90</span>% теста решено верно
+</div>
+
 {% endblock %}
