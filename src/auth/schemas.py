@@ -36,6 +36,11 @@ class Tokens(RefreshToken):
     access_token: str
 
 
+class VRTokens(Base):
+    vr_access_token: str
+    vr_refresh_token: str
+
+
 class ResponseRegisterUser(Tokens):
     user: ReadUser
 
