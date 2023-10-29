@@ -22,9 +22,7 @@ async def current_user(user: User = Depends(get_user_or_401)) -> UserProfileRead
 
 
 @user_router.patch("/update")
-async def update_profile(
-    data: UserProfileRead, user: User = Depends(get_user_or_401)
-) -> UserProfileRead:
+async def update_profile(data: UpdateUser, user: User = Depends(get_user_or_401)) -> UpdateUser:
     user = await user_service.update(user.id, data.model_dump(exclude_unset=True))
     return UpdateUser(
         first_name=user.first_name, last_name=user.last_name, patronymic=user.patronymic
