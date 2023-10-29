@@ -74,6 +74,11 @@ Case description
 docker-compose up --build
 ```
 
+Чтобы загрузить тестовые данные выполните команду:
+```bash
+docker-compose exec web python core/cmds.py loaddata
+```
+
 Без использования Docker:
 1. Установите redis
 2. Установите postgreSQL
@@ -120,6 +125,11 @@ python3 -m pip install -r requirements.txt
 ```bash
 alembic upgrade head
 ```
+6. Загрузите тестовые данные:
+```bash
+python3 core/cmds.py loaddata
+```
+
 6. Запустите сервер:
 ```bash
 uvicorn src.main:app --reload
