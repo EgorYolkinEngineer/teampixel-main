@@ -1,7 +1,7 @@
 from fastapi import HTTPException, Request
 from jwt import ExpiredSignatureError
 from starlette.status import HTTP_403_FORBIDDEN, HTTP_401_UNAUTHORIZED
-from core.exceptions import TokenException, ValidationError
+from core.exceptions import NoRowsFoundError, TokenException, ValidationError
 
 from src.auth.jwt.token import token_service
 from src.auth.schemas import LoginUser, RegisterUser, ResponseLoginUser, ResponseRegisterUser
@@ -42,7 +42,12 @@ class Authenticate:
             return None
         if self.role:
             await self._check_role(decoded_token["user_role"])
-        return await user_service.retrieve(pk=decoded_token["user_id"])
+        try:
+            return await user_service.retrieve(pk=decoded_token["user_id"])
+        except NoRowsFoundError:
+            raise HTTPException(
+                HTTP_401_UNAUTHORIZED, "Unauthorized", headers={"WWW-Authenticate": "Bearer"}
+            )
 
     async def _check_role(self, role: str) -> HTTPException | None:
         if role not in (self.role, Role.SUPERUSER.value):
