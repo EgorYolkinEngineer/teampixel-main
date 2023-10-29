@@ -112,7 +112,6 @@ TEST_POSTGRES_HOST=db
 TEST_POSTGRES_PORT=5432
 
 ```
-
 4. Установите зависимости:
 ```bash
 python3 -m pip install -r requirements.txt
