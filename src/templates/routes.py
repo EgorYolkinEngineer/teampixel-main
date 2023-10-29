@@ -32,8 +32,7 @@ async def auth(request: Request):
 async def profile_tests(request: Request, test_id: str):
     return templates.TemplateResponse("test.html", {"request": request, 
                                                              "test_id": test_id})
-    
-    
+
 
 @templates_router.get("/base/tests/")
 async def profile_tests(request: Request, user: User = Depends(get_user_or_401)):

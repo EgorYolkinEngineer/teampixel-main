@@ -8,33 +8,19 @@
 <br><br>
 
 
-<form>
-    <p>Выберите ваш любимый цвет:</p>
-    <input type="radio" id="red" name="color" value="red">
-    <label for="red">Красный</label><br>
-    <input type="radio" id="green" name="color" value="green">
-    <label for="green">Зеленый</label><br>
-    <input type="radio" id="blue" name="color" value="blue">
-    <label for="blue">Синий</label><br>
-  </form>
-  <form>
-    <p>Выберите ваш любимый цвет:</p>
-    <input type="radio" id="red" name="color" value="red">
-    <label for="red">Красный</label><br>
-    <input type="radio" id="green" name="color" value="green">
-    <label for="green">Зеленый</label><br>
-    <input type="radio" id="blue" name="color" value="blue">
-    <label for="blue">Синий</label><br>
-  </form>
-  <form>
-    <p>Выберите ваш любимый цвет:</p>
-    <input type="radio" id="red" name="color" value="red">
-    <label for="red">Красный</label><br>
-    <input type="radio" id="green" name="color" value="green">
-    <label for="green">Зеленый</label><br>
-    <input type="radio" id="blue" name="color" value="blue">
-    <label for="blue">Синий</label><br>
-  </form>
+<div id="testForms">
+</div>
+
+<div id="test-result-success" class="alert alert-success d-none" role="alert">
+    Результат тестирования: <span class="testResult">90</span>% теста решено верно
+</div>
+<div id="test-result-danger" class="alert alert-danger d-none" role="alert">
+    Результат тестирования: <span class="testResult">20</span>% теста решено верно
+</div>
+
+<button type="button" class="btn btn-dark" onclick="submitTest();">
+    Завершить тестирование
+</button>
 
 <script>getTest("{{ test_id }}");</script>
 {% endblock %}

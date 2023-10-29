@@ -1,6 +1,15 @@
 {% extends 'index.html' %}
 
 {% block content %}
+
+<style>
+  @media (max-width: 1200px) {
+    .left-profile-navbar {
+      display: none!important;
+    }
+  }
+</style>
+
 <script src="/static/js/auth.js"></script>
 <div class="left-profile-navbar d-flex flex-column flex-shrink-0 p-3 bg-dark" style="width: 280px;">
     <ul class="nav nav-pills flex-column mb-auto">
@@ -28,12 +37,12 @@
           Мои результаты
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/profile/appeals/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           Мои обращения 
         </a>
-      </li>
+      </li> -->
       <hr>
       {% if role == "HR" or role == "ADMIN" or role == "SUPERUSER" %}
       Администратор, представитель предприятия, HR

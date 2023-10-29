@@ -48,6 +48,7 @@ async function getCourse(pk) {
 	let result = await response.json()
 
     if (status === 200) {
+        console.log(result);
         document.getElementById("courseName").innerHTML = result["name"];
         document.getElementById("courseDepartment").innerHTML = result["department_name"];
         document.getElementById("courseContent").innerHTML = result["content"];
