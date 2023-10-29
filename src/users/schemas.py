@@ -18,3 +18,7 @@ class UpdateUser(Base):
     first_name: str
     last_name: str
     patronymic: str | None = None
+
+
+class TextReview(Base):
+    text: str
