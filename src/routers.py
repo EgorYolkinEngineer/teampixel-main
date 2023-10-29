@@ -5,7 +5,7 @@ from src.auth.routes import auth_router
 from src.courses.routers import education_router
 from src.portals.routes import portal_router, department_router
 from src.users.routes import user_router
-from src.vr_api.routes import vr_router
+from src.vr_api.routers import vr_router
 
 
 def get_api_router() -> APIRouter:
