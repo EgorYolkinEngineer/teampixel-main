@@ -1,6 +1,6 @@
 async function authVR() {
     let response = await fetch('/api/v1/vr/auth', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
