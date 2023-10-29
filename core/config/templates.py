@@ -11,3 +11,5 @@ STATIC_DIR = "static"
 # Media
 MEDIA_PATH = "/media"
 MEDIA_DIR = "media"
+
+DEFAULT_AVATAR = f"{MEDIA_DIR}/default.jpg"

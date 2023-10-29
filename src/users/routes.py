@@ -1,10 +1,11 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from starlette.status import HTTP_400_BAD_REQUEST
 
 from core.exceptions import NoRowsFoundError
 from core.service import generic_service
+from core.config.templates import MEDIA_DIR
 from src.auth.service import get_user_or_401
 from src.portals.schemas import UserProfileRead
 from src.users.schemas import TextReview, UpdateUser
@@ -46,3 +47,12 @@ async def dismissal(worker_id: UUID) -> UpdateUser:
         return await user_service.update(worker_id, {"department_id": None})
     except NoRowsFoundError:
         raise HTTPException(HTTP_400_BAD_REQUEST, "Такого департамента не существует")
+
+
+@user_router.put("/update/avatar")
+async def update_avatar(image: UploadFile = File(), user: User = Depends(get_user_or_401)):
+    file_extension = image.filename.split(".")[-1]
+    file_location = f"{MEDIA_DIR}/{user.id}.{file_extension}"
+    with open(file_location, "wb+") as file_object:
+        file_object.write(image.file.read())
+    return {"location": file_location}
