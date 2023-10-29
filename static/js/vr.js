@@ -1,11 +1,3 @@
-let response = await fetch('/api/v1/vr/auth', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
-
-
 async function getUserModules() {
     let response = await fetch('/api/v1/vr/modules/all/', {
 		method: 'GET',

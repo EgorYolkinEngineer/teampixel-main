@@ -1,3 +1,11 @@
+let response = await fetch('/api/v1/vr/auth', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+
 async function getUserTests() {
     let response = await fetch('/api/v1/tests/user', {
 		method: 'GET',
