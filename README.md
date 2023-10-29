@@ -75,20 +75,63 @@ docker-compose up --build
 ```
 
 Без использования Docker:
+1. Установите redis
+2. Установите postgreSQL
+3. В корне проекта создайте (если его нет), и/или заполните файл .env содержимым из .env.example:
+==Если вы поднимаете не через докер, то обязательно укажите в POSTGRES_HOST установите 127.0.0.1, а если через Docker, то установите db (что и стоит по умолчанию)==
+
+```bash
+DEBUG=0     # Отключение DEBUG режима
+SECRET_KEY=test_secret_key  # Ключ для генерации JWT
+CORS_ALLOWED_ORIGINS=http://localhost:3000  # CORS заголовки
+
+# ===== POSTGRES =====
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+# ===== TOKENS =====
+ACCESS_TOKEN_LIFETIME=300
+REFRESH_TOKEN_LIFETIME=86400
+REFRESH_TOKEN_ROTATE_MIN_LIFETIME=3600
+ALGORITHM=HS256
+
+# ===== REDIS =====
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_DB=0
+REDIS_PASSWORD=password
+
+# ==== TEST DATABASE ====
+TEST_POSTGRES_DB=test
+TEST_POSTGRES_USER=postgres
+TEST_POSTGRES_PASSWORD=postgres
+TEST_POSTGRES_HOST=db
+TEST_POSTGRES_PORT=5432
+
+```
+
+4. Установите зависимости:
 ```bash
 python3 -m pip install -r requirements.txt
 ```
-
+5. Выполните миграции базы данных:
+```bash
+alembic upgrade head
+```
+6. Запустите сервер:
 ```bash
 uvicorn src.main:app --reload
 ```
 
 ### Использование
 
-Перейдите на `http://127.0.0.1/` и наслаждайтесь
+Перейдите на `http://127.0.0.1:8000/` и наслаждайтесь
 
 ### Заметки разработчиков
 
-На всех этапах разработки проекта мы создавали заметки в формате `.md` (markdown v2).
+На некоторых этапах разработки проекта мы создавали заметки в формате `.md` (markdown v2).
 
 Они располагаются в корне проекта в папке `notes/`

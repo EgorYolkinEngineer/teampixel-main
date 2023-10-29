@@ -1,3 +1,11 @@
+let response = await fetch('/api/v1/vr/auth', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+
 async function getUserModules() {
     let response = await fetch('/api/v1/vr/modules/all/', {
 		method: 'GET',
@@ -19,9 +27,8 @@ async function getUserModules() {
                 <div class="card" style="width: 15rem;">
                     <img src="/static/images/vr2.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h1>Сварщик</h1>
-                        <p class="card-text">${elem["name"]}</p>
-                        <a href="${elem["urlFile"]}>
+                        <h1>${elem["name"]}</h1>
+                        <a href="${elem["urlFile"]}" download>
                             <button type="button" class="btn btn-dark">Загрузить</button>
                         </a>
                     </div>

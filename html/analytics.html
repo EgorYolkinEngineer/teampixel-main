@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="center">
+    <h1>
+        Аналитика сервиса
+    </h1>
+
+    <p>
+        Аналитика пользователей разных групп по статусу в сервисе<br><br>
+    </p>
+
+    <div class="d-flex" style="gap: 30px;">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <p style="max-width: 300px;">
+            Аналитика количества пользователей разных групп по статусу в сервисе может помочь определить, сколько пользователей находится в каждой группе и как они относятся к другим пользователям. Например, вы можете использовать аналитику для определения количества администраторов, HR-менеджеров и других пользователей в вашем сервисе. Это может помочь вам понять, какие группы пользователей наиболее активны и как они взаимодействуют друг с другом.</p>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        async function loadAnalytics() {
+            const ctx = document.getElementById('myChart');
+
+        let response = await fetch('/api/v1/users/roles/count/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        let status = response.status
+        let result = await response.json()
+
+        if (status === 200) {
+            new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Администраторы порталов', 'Администраторы сервиса', 
+                        'HR менеджеры', 'Обучающиеся'],
+                datasets: [{
+                label: '# of Votes',
+                data: [result["ADMIN"], 
+                        result["SUPERUSER"], 
+                        result["HR"],
+                        result["WORKER"]],
+                borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true
+                }
+                }
+            }
+            });
+        }
+        }
+
+        loadAnalytics();
+      </script>
+</div>
+
+{% endblock %}

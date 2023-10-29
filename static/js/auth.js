@@ -26,11 +26,7 @@ async function getUser() {
 		${result["user"]["first_name"]} 
 		${result["user"]["last_name"]} 
 		`
-
-		if (response["user"]["avatar"].length > 0) {
-			document.getElementById("avatar").src += result["user"]["avatar"];
-		}
-
+		
 		if (result["user"]["patronymic"]) {
 			document.getElementById("fullName").innerHTML += result["user"]["patronymic"];
 			document.getElementById("editPatronymic").value = result["user"]["patronymic"]; 
@@ -44,6 +40,47 @@ async function getUser() {
 		if (result["user"]["portal"]) {
 			document.getElementById("portal").textContent = result["user"]["portal"]["name"];
 		}
+
+		console.log(result["user"]["avatar"]);
+
+		if (result["user"]["avatar"]) {
+			document.getElementById("avatar").src = "/" + result["user"]["avatar"];
+		}
+	} else if (status === 422) {
+		showToast(result['detail'][0]['msg'])
+	} else if (status === 400) {
+		showToast(result['detail'])
+	} else {
+		showToast('неизвестная ошибка!')
+	}
+}
+
+
+async function updateAvatar() {
+	var form = new FormData();
+	form.append(
+		'avatar', 
+		document.getElementById('editAvatar').files[0]
+	);
+
+	console.log(document.getElementById('editAvatar').files[0]);
+
+	// var xhr = new XMLHttpRequest();
+	// xhr.open('PATCH', '/api/v1/users/update');
+	// xhr.send(form);
+
+	// console.log(xhr.response.json());
+
+	let response = await fetch('/api/v1/users/update', {
+		method: 'PATCH',
+		body: form
+	})
+
+	let status = response.status
+	let result = await response.json()
+
+	if (status === 200) {
+		location.reload();
 	} else if (status === 422) {
 		showToast(result['detail'][0]['msg'])
 	} else if (status === 400) {
@@ -55,22 +92,23 @@ async function getUser() {
 
 
 async function updateUser() {
-	var form = new FormData();
-	form.append('avatar', document.getElementById('avatar').files[0]);
-	form.append('first_name', document.getElementById("editFirstName").value);
-	form.append('last_name', document.getElementById("editLastName").value)
-	form.append('patronymic', document.getElementById("editPatronymic").value)
-	// let firstName = document.getElementById("editFirstName").value;
-	// let lastName = document.getElementById("editLastName").value;
-	// let patronymic = document.getElementById("editPatronymic").value; 
+	
+	let firstName = document.getElementById("editFirstName").value;
+	let lastName = document.getElementById("editLastName").value;
+	let patronymic = document.getElementById("editPatronymic").value; 
 
 	let response = await fetch('/api/v1/users/update', {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: form
+		body: JSON.stringify({
+			first_name: firstName, 
+			last_name: lastName,
+			patronymic: patronymic
+		})
 	})
+
 	let status = response.status
 	let result = await response.json()
 

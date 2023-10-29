@@ -13,7 +13,7 @@ async function getDepartments() {
 
         result.forEach(function(item) {
             let option = document.createElement('option');
-            option.value = item.id;
+            option.value = item.name;
             option.text = item.name;
             select.appendChild(option);
         });

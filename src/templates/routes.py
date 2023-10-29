@@ -23,6 +23,12 @@ async def possibilities(request: Request):
     return templates.TemplateResponse("possibilities.html", {"request": request})
 
 
+@templates_router.get("/analytics/")
+async def auth(request: Request):
+    return templates.TemplateResponse("analytics.html", {"request": request})
+
+
+
 @templates_router.get("/auth/")
 async def auth(request: Request):
     return templates.TemplateResponse("auth.html", {"request": request})

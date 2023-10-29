@@ -31,15 +31,15 @@
           Мои тесты
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/profile/results/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
           Мои результаты
         </a>
-      </li>
-      <hr>
+      </li> -->
+      <!-- <hr> -->
       {% if role == "HR" or role == "ADMIN" or role == "SUPERUSER" %}
-      Администратор, представитель предприятия, HR
+
       <li>
         <a href="/dashboard/hr/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
@@ -47,7 +47,7 @@
         </a>
       </li>
       <li>
-        <a href="/dashboard/hr/" class="nav-link link-light">
+        <a href="/base/tests/" class="nav-link link-light">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
           База тестов
         </a>
@@ -107,9 +107,12 @@
                           <input id="editLastName" type="text" class="form-control" placeholder="Фамилия">
                           <br>
                           <input id="editPatronymic" type="text" class="form-control" placeholder="Отчество">
-                          <br>
-                          <input accept="image/jpeg,image/png,image/jpg" id="editAvatar" type="file"form-control" placeholder="Отчество">
+                          <!-- <br> -->
+                          <!-- <input accept="image/jpeg,image/png,image/jpg" id="editAvatar" type="file"form-control" placeholder="Отчество"> -->
                         </div>
+                        <!-- <button onclick="updateAvatar();" style="margin: 15px;" type="button" class="btn btn-success">
+                          Обновить фото профиля
+                        </button> -->
                         <button onclick="logout();" style="margin: 15px;" type="button" class="btn btn-danger">
                           Сменить профиль
                         </button>
