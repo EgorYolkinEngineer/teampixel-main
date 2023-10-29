@@ -1,5 +1,5 @@
 import aiohttp
-from aiohtp.client import ContentTypeError
+from aiohttp.client import ContentTypeError
 
 from src.users.models import User
 from src.vr_api.urls import SIGNUP, SINGIN, PROFILE, REFRESH
@@ -8,8 +8,11 @@ from src.vr_api.urls import SIGNUP, SINGIN, PROFILE, REFRESH
 class VRAuthService:
     header: str = {"ngrok-skip-browser-warning": "69420"}
 
-    async def auth(self, user: User):
-        credentials = {"email": user.email, "password": user.password}
+    def __init__(self, user: User) -> None:
+        self.user = user
+
+    async def auth(self):
+        credentials = {"email": self.user.email, "password": self.user.password}
         try:
             token_pairs = await self.signup(credentials)
         except ContentTypeError:
@@ -26,5 +29,5 @@ class VRAuthService:
             async with session.post(SINGIN, json=data) as response:
                 return await response.json()
 
-
-vr_auth_service = VRAuthService()
+    async def profile(self, token):
+        pass
