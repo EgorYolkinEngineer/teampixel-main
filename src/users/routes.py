@@ -7,7 +7,7 @@ from core.exceptions import NoRowsFoundError
 from core.service import generic_service
 from src.auth.service import get_user_or_401
 from src.portals.schemas import UserProfileRead
-from src.users.schemas import UpdateUser
+from src.users.schemas import TextReview, UpdateUser
 from src.users.models import Review, User
 from src.users.service import user_service
 
@@ -29,9 +29,15 @@ async def update_profile(data: UpdateUser, user: User = Depends(get_user_or_401)
 
 
 @user_router.get("/reviews")
-async def reviews_list():
+async def reviews_list() -> list[TextReview]:
     service = await generic_service(Review)
     return await service.all()
+
+
+@user_router.post("/reviews/create", dependencies=[Depends(get_user_or_401)])
+async def add_review(data: TextReview) -> TextReview:
+    service = await generic_service(Review)
+    return await service.add(data.model_dump())
 
 
 @user_router.delete("/dismiss/{worker_id}")
