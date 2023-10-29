@@ -42,6 +42,7 @@ class ReadDepartment(Base):
 class UserProfile(ReadUser):
     portal: ReadPortal | None
     department: ReadDepartment | None
+    avatar: str
 
 
 class UserProfileRead(Base):
